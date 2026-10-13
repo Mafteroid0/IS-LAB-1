@@ -1,0 +1,21 @@
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" version="6.0">
+  <session-config>
+    <session-timeout>30</session-timeout>
+    <cookie-config><http-only>true</http-only></cookie-config>
+    <tracking-mode>COOKIE</tracking-mode>
+  </session-config>
+  <data-source>
+    <name>java:app/jdbc/Routes</name>
+    <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
+    <server-name>${ENV=DB_HOST}</server-name>
+    <port-number>${ENV=DB_PORT}</port-number>
+    <database-name>${ENV=DB_NAME}</database-name>
+    <user>${ENV=DB_USER}</user>
+    <password>${ENV=DB_PASSWORD}</password>
+    <property><name>currentSchema</name><value>${ENV=DB_SCHEMA}</value></property>
+    <property><name>sslmode</name><value>${ENV=DB_SSLMODE}</value></property>
+    <initial-pool-size>1</initial-pool-size>
+    <min-pool-size>1</min-pool-size>
+    <max-pool-size>10</max-pool-size>
+  </data-source>
+</web-app>

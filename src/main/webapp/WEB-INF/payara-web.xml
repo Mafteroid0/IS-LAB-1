@@ -1,0 +1,3 @@
+<payara-web-app>
+  <class-loader delegate="false"/>
+</payara-web-app>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Маршруты — информационная система</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <section id="auth" class="auth-shell">
+    <div class="auth-card">
+      <div class="brand-mark">R</div>
+      <p class="eyebrow">ИНФОРМАЦИОННАЯ СИСТЕМА</p>
+      <h1>Маршруты</h1>
+      <p class="muted">Общий реестр маршрутов, координат и локаций.</p>
+      <form id="auth-form">
+        <label>Логин<input name="username" autocomplete="username" required pattern="[a-zA-Z0-9_]{3,32}" minlength="3" maxlength="32" placeholder="Латинские буквы, цифры, _"></label>
+        <label>Пароль<input name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="128" placeholder="Не менее 8 символов"></label>
+        <p class="error" id="auth-error" role="alert"></p>
+        <div class="actions"><button type="submit" value="login">Войти</button><button type="submit" value="register" class="secondary">Создать аккаунт</button></div>
+      </form>
+    </div>
+  </section>
+  <div id="app" hidden>
+    <header>
+      <a class="brand" href="#routes"><span class="brand-mark small">R</span>Маршруты</a>
+      <nav aria-label="Основное меню">
+        <a href="#routes">Реестр</a><a href="#coordinates">Координаты</a><a href="#locations">Локации</a><a href="#operations">Операции</a>
+      </nav>
+      <div class="account"><span id="username"></span><button id="logout" class="plain">Выйти</button></div>
+    </header>
+    <main>
+      <div class="sync-line"><span id="sync-status">Подключение…</span><button class="plain" id="refresh">Обновить</button></div>
+      <div id="notice" role="status" hidden></div>
+      <section id="routes-section">
+        <div class="section-heading"><div><p class="eyebrow">ОБЩИЙ РЕЕСТР</p><h1>Маршруты</h1></div><button id="new-route">+ Добавить маршрут</button></div>
+        <form id="filters" class="filters">
+          <label>Название маршрута<input name="name" placeholder="Точное название"></label>
+          <label>Название отправления<input name="fromName" placeholder="Точное название локации"></label>
+          <label>Название назначения<input name="toName" placeholder="Точное название локации"></label>
+          <button type="submit" class="secondary">Найти</button><button type="reset" class="plain">Сбросить</button>
+        </form>
+        <div class="toolbar"><form id="find-id" class="inline-form"><label class="sr-only" for="route-id">ID маршрута</label><input id="route-id" name="id" placeholder="ID маршрута" inputmode="numeric" pattern="[1-9][0-9]*" required><button class="secondary">Открыть по ID</button></form><span class="muted">Точное совпадение с учётом регистра · Сортировка по заголовку колонки</span></div>
+        <div id="route-table" class="table-wrap"></div>
+        <div class="pagination"><span id="page-info"></span><div class="actions"><label>Строк<select id="page-size"><option>10</option><option>20</option><option>50</option></select></label><button id="prev-page" class="secondary">Назад</button><button id="next-page" class="secondary">Далее</button></div></div>
+      </section>
+      <section id="coordinates-section" hidden>
+        <div class="section-heading"><div><p class="eyebrow">СВЯЗАННЫЕ ОБЪЕКТЫ</p><h1>Координаты</h1></div><button id="new-coordinates">+ Добавить координаты</button></div>
+        <p class="muted">Общие координаты могут использоваться несколькими маршрутами. При удалении используемой точки выберите замену.</p>
+        <div id="coordinates-table" class="table-wrap"></div>
+      </section>
+      <section id="locations-section" hidden>
+        <div class="section-heading"><div><p class="eyebrow">СВЯЗАННЫЕ ОБЪЕКТЫ</p><h1>Локации</h1></div><button id="new-location">+ Добавить локацию</button></div>
+        <p class="muted">Локация может быть отправлением и назначением разных маршрутов. Изменение локации отразится во всех связанных маршрутах.</p>
+        <div id="locations-table" class="table-wrap"></div>
+      </section>
+      <section id="operations-section" hidden>
+        <div class="section-heading"><div><p class="eyebrow">СПЕЦИАЛЬНЫЕ ДЕЙСТВИЯ</p><h1>Операции с маршрутами</h1></div></div>
+        <div class="operations-grid">
+          <form id="op-average" class="operation-card"><h2>Средний рейтинг</h2><p>Среднее значение рейтинга всех маршрутов.</p><button>Рассчитать</button></form>
+          <form id="op-count" class="operation-card"><h2>Рейтинг ниже заданного</h2><p>Количество маршрутов со строго меньшим рейтингом.</p><label>Порог рейтинга<input name="rating" type="number" step="any" required></label><button>Посчитать</button></form>
+          <form id="op-contains" class="operation-card"><h2>Поиск по подстроке</h2><p>Название содержит введённый текст с учётом регистра. Пустая строка найдёт все маршруты.</p><label>Часть названия<input name="part"></label><button>Найти маршруты</button></form>
+          <form id="op-between" class="operation-card"><h2>Между локациями</h2><p>Прямые маршруты из отправления в назначение.</p><label>Отправление<select name="fromId" data-ref="locations" required></select></label><label>Назначение<select name="toId" data-ref="locations" required></select></label><div class="form-grid"><label>Сортировать по<select name="sort"><option value="id">ID</option><option value="name">Названию</option><option value="creationDate">Дате создания</option><option value="distance">Расстоянию</option><option value="rating">Рейтингу</option></select></label><label>Порядок<select name="direction"><option value="asc">Возрастание</option><option value="desc">Убывание</option></select></label></div><button>Найти маршруты</button></form>
+          <form id="op-create" class="operation-card"><h2>Новый маршрут между локациями</h2><p>Выберите отправление и назначение, затем заполните параметры маршрута.</p><label>Отправление<select name="fromId" data-ref="locations" required></select></label><label>Назначение<select name="toId" data-ref="locations" required></select></label><button>Заполнить маршрут</button></form>
+        </div>
+        <div id="operation-result" hidden><h2 id="operation-title"></h2><div id="operation-table" class="table-wrap" aria-live="polite"></div></div>
+      </section>
+    </main>
+  </div>
+  <dialog id="modal" aria-labelledby="modal-title"><div class="modal-heading"><h2 id="modal-title"></h2><button id="close-modal" class="plain" aria-label="Закрыть">✕</button></div><div id="modal-content"></div></dialog>
+</body>
+</html>
