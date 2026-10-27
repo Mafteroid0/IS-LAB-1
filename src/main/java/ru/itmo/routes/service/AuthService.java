@@ -6,10 +6,10 @@ import jakarta.transaction.Transactional;
 import ru.itmo.routes.model.Account;
 import ru.itmo.routes.repository.AccountRepository;
 import ru.itmo.routes.dto.Requests.Credentials;
-import ru.itmo.routes.error.Problem;
-import static ru.itmo.routes.error.Problem.Kind.*;
+import ru.itmo.routes.error.*;
 
 @ApplicationScoped
+@TranslateServiceErrors
 @Transactional
 public class AuthService {
     @Inject private AccountRepository accounts;
@@ -18,16 +18,16 @@ public class AuthService {
     public String register(Credentials input) {
         String hash = Passwords.hash(input.password);
         changes.changed();
-        if (accounts.find(input.username).isPresent()) throw new Problem(CONFLICT, "Логин уже занят");
+        if (accounts.find(input.username).isPresent()) throw new ConflictException("Логин уже занят");
         accounts.save(new Account(input.username, hash));
         return input.username;
     }
 
     public String login(Credentials input) {
         Account account = accounts.find(input.username)
-                .orElseThrow(() -> new Problem(UNAUTHORIZED, "Неверный логин или пароль"));
+                .orElseThrow(() -> new UnauthorizedException("Неверный логин или пароль"));
         if (!Passwords.matches(input.password, account.getPasswordHash()))
-            throw new Problem(UNAUTHORIZED, "Неверный логин или пароль");
+            throw new UnauthorizedException("Неверный логин или пароль");
         return account.getUsername();
     }
 }

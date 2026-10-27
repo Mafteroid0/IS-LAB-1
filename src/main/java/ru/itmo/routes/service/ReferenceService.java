@@ -7,11 +7,11 @@ import ru.itmo.routes.dto.Requests.*;
 import ru.itmo.routes.dto.Views.*;
 import ru.itmo.routes.model.*;
 import ru.itmo.routes.repository.*;
-import ru.itmo.routes.error.Problem;
+import ru.itmo.routes.error.*;
 import java.util.List;
-import static ru.itmo.routes.error.Problem.Kind.*;
 
 @ApplicationScoped
+@TranslateServiceErrors
 @Transactional
 public class ReferenceService {
     @Inject private ReferenceRepository references;
@@ -81,6 +81,7 @@ public class ReferenceService {
         linked.forEach(route -> route.moveCoordinates(replacement));
         routes.flush();
         references.remove(value);
+        references.flush();
     }
 
     public void deleteLocation(long id, Long version, Long replacementId) {
@@ -94,6 +95,7 @@ public class ReferenceService {
         linked.forEach(route -> route.replaceLocation(id, replacement));
         routes.flush();
         references.remove(value);
+        references.flush();
     }
 
     private Coordinates requireCoordinates(long id) {
@@ -106,11 +108,11 @@ public class ReferenceService {
 
     private void checkReplacement(long id, Long replacementId) {
         if (replacementId != null && replacementId == id)
-            throw new Problem(INVALID, "Для замены выберите другой объект");
+            throw new InvalidInputException("Для замены выберите другой объект");
     }
 
     private void requireReplacement(List<Route> linked, Object replacement) {
         if (!linked.isEmpty() && replacement == null)
-            throw new Problem(CONFLICT, "Объект используется маршрутами. Выберите замену.");
+            throw new ConflictException("Объект используется маршрутами. Выберите замену.");
     }
 }

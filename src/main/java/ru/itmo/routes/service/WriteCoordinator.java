@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import ru.itmo.routes.model.State;
 
 @ApplicationScoped
+@TranslateServiceErrors
 public class WriteCoordinator {
     @PersistenceContext(unitName = "routes")
     private EntityManager em;

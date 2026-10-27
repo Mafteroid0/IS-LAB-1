@@ -1,5 +1,3 @@
-BEGIN;
-
 CREATE OR REPLACE FUNCTION rl_average_rating()
 RETURNS double precision
 LANGUAGE sql STABLE
@@ -74,5 +72,3 @@ BEGIN
     RETURN result;
 END
 $$;
-
-COMMIT;
