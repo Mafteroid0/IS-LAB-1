@@ -7,11 +7,11 @@ import ru.itmo.routes.dto.Requests.RouteInput;
 import ru.itmo.routes.dto.Views.*;
 import ru.itmo.routes.model.*;
 import ru.itmo.routes.repository.*;
-import ru.itmo.routes.error.Problem;
+import ru.itmo.routes.error.*;
 import java.util.Set;
-import static ru.itmo.routes.error.Problem.Kind.INVALID;
 
 @ApplicationScoped
+@TranslateServiceErrors
 @Transactional
 public class RouteService {
     @Inject private RouteRepository routes;
@@ -21,11 +21,11 @@ public class RouteService {
     public Page<RouteView> list(int page, int size, String name, String fromName, String toName,
                                 String sort, String direction) {
         if (page < 0 || page > Integer.MAX_VALUE / 100 || size < 1 || size > 100)
-            throw new Problem(INVALID, "Страница должна быть неотрицательной, размер — от 1 до 100");
+            throw new InvalidInputException("Страница должна быть неотрицательной, размер — от 1 до 100");
         if (!Set.of("id", "name", "fromName", "toName", "creationDate", "distance", "rating").contains(sort))
-            throw new Problem(INVALID, "Недопустимый параметр сортировки");
+            throw new InvalidInputException("Недопустимый параметр сортировки");
         if (!Set.of("asc", "desc").contains(direction))
-            throw new Problem(INVALID, "Направление сортировки: asc или desc");
+            throw new InvalidInputException("Направление сортировки: asc или desc");
         long total = routes.count(name, fromName, toName);
         int selected = (int) Math.min(page, Math.max(0, (total - 1) / size));
         return new Page<>(routes.list(name, fromName, toName, sort, direction.equals("desc"), selected * size, size)
@@ -59,6 +59,7 @@ public class RouteService {
         Route value = require(id);
         Checks.version(value.getVersion(), version);
         routes.remove(value);
+        routes.flush();
     }
 
     private Route require(long id) {

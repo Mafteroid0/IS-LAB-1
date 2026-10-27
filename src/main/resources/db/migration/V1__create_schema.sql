@@ -1,5 +1,3 @@
-BEGIN;
-
 CREATE SEQUENCE rl_coordinates_seq AS bigint MINVALUE 1;
 CREATE SEQUENCE rl_location_seq AS bigint MINVALUE 1;
 CREATE SEQUENCE rl_route_seq AS bigint MINVALUE 1;
@@ -51,5 +49,3 @@ CREATE TABLE rl_state (
 );
 
 INSERT INTO rl_state VALUES (1, 0);
-
-COMMIT;
