@@ -10,13 +10,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.routes.dto.Requests.Credentials;
 import ru.itmo.routes.error.UnauthorizedException;
+import ru.itmo.routes.security.Roles;
 import ru.itmo.routes.service.AuthService;
 import java.util.Map;
 
@@ -26,11 +26,14 @@ public class AuthController {
     private final AuthService auth;
     private final AuthenticationManager authentication;
     private final SecurityContextRepository contexts;
+    private final Roles roles;
 
-    public AuthController(AuthService auth, AuthenticationManager authentication, SecurityContextRepository contexts) {
+    public AuthController(AuthService auth, AuthenticationManager authentication,
+                          SecurityContextRepository contexts, Roles roles) {
         this.auth = auth;
         this.authentication = authentication;
         this.contexts = contexts;
+        this.roles = roles;
     }
 
     @PostMapping("/register")
@@ -53,7 +56,7 @@ public class AuthController {
 
     @GetMapping("/me")
     public Map<String, String> me(Authentication current) {
-        return Map.of("username", current.getName());
+        return profile(current.getName(), Roles.isAdmin(current));
     }
 
     @PostMapping("/logout")
@@ -71,9 +74,13 @@ public class AuthController {
         request.getSession(true);
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(UsernamePasswordAuthenticationToken.authenticated(
-                username, null, AuthorityUtils.NO_AUTHORITIES));
+                username, null, roles.authorities(username)));
         SecurityContextHolder.setContext(context);
         contexts.saveContext(context, request, response);
-        return Map.of("username", username);
+        return profile(username, Roles.isAdmin(context.getAuthentication()));
+    }
+
+    private static Map<String, String> profile(String username, boolean admin) {
+        return Map.of("username", username, "role", admin ? "ADMIN" : "USER");
     }
 }
