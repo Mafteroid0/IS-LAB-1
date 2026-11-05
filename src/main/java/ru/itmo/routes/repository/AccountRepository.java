@@ -1,22 +1,9 @@
 package ru.itmo.routes.repository;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.itmo.routes.model.Account;
 import java.util.Optional;
 
-@ApplicationScoped
-public class AccountRepository {
-    @PersistenceContext(unitName = "routes")
-    private EntityManager em;
-
-    public Optional<Account> find(String username) {
-        return em.createQuery("select a from Account a where a.username = :username", Account.class)
-                .setParameter("username", username).getResultStream().findFirst();
-    }
-
-    public void save(Account account) {
-        em.persist(account);
-        em.flush();
-    }
+public interface AccountRepository extends JpaRepository<Account, Long> {
+    Optional<Account> findByUsername(String username);
 }

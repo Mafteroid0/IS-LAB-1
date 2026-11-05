@@ -1,11 +1,7 @@
-package ru.itmo.routes.service;
+package ru.itmo.routes.error;
 
 import jakarta.persistence.OptimisticLockException;
 import jakarta.persistence.PersistenceException;
-import jakarta.transaction.RollbackException;
-import jakarta.transaction.SystemException;
-import jakarta.transaction.TransactionalException;
-import javax.transaction.xa.XAException;
 import jakarta.validation.ConstraintViolationException;
 import java.sql.BatchUpdateException;
 import java.sql.SQLException;
@@ -13,7 +9,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import ru.itmo.routes.error.*;
+import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
+import org.springframework.transaction.CannotCreateTransactionException;
+import org.springframework.transaction.TransactionSystemException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ServiceErrorsTest {
@@ -24,12 +24,24 @@ class ServiceErrorsTest {
             "40001, ConflictException", "40P01, ConflictException", "55P03, ConflictException",
             "42601, DatabaseException"})
     void translatesSqlFailuresInsideTransactionWrappers(String state, String type) {
-        Exception original = new RollbackException("commit failed");
-        original.initCause(new PersistenceException(new SQLException("private SQL detail", state)));
+        Exception original = new TransactionSystemException("commit failed",
+                new PersistenceException(new SQLException("private SQL detail", state)));
         Exception result = ServiceErrors.translate(original);
         assertEquals(type, result.getClass().getSimpleName());
         assertSame(original, result.getCause());
         assertFalse(result.getMessage().contains("private SQL detail"));
+    }
+
+    @Test
+    void sqlStateWinsOverGenericSpringIntegrityException() {
+        var error = new DataIntegrityViolationException("wrapped", new SQLException("range", "22003"));
+        assertInstanceOf(InvalidInputException.class, ServiceErrors.translate(error));
+    }
+
+    @Test
+    void integrityViolationWithoutSqlStateIsConflict() {
+        assertInstanceOf(ConflictException.class,
+                ServiceErrors.translate(new DataIntegrityViolationException("constraint")));
     }
 
     @Test
@@ -55,10 +67,20 @@ class ServiceErrorsTest {
     void translatesOptimisticLocking() {
         assertInstanceOf(ConflictException.class,
                 ServiceErrors.translate(new PersistenceException(new OptimisticLockException())));
+        assertInstanceOf(ConflictException.class,
+                ServiceErrors.translate(new ObjectOptimisticLockingFailureException(Object.class, 1L)));
     }
 
     @Test
-    void leavesProgrammingErrorsToTheFallbackMapper() {
+    void reportsUnreachableDatabaseAsUnavailable() {
+        assertInstanceOf(DatabaseUnavailableException.class,
+                ServiceErrors.translate(new CannotCreateTransactionException("no connection")));
+        assertInstanceOf(DatabaseUnavailableException.class,
+                ServiceErrors.translate(new DataAccessResourceFailureException("closed")));
+    }
+
+    @Test
+    void leavesProgrammingErrorsToTheFallbackHandler() {
         var error = new NumberFormatException("invalid stored password hash");
         assertSame(error, ServiceErrors.translate(error));
     }
@@ -69,13 +91,11 @@ class ServiceErrorsTest {
     }
 
     @Test
-    void handlesCommitFailureWhenTheAdapterDiscardsTheSqlCause() {
-        var system = new SystemException();
-        system.initCause(new XAException("private adapter details"));
-        var error = new TransactionalException("commit failed", system);
+    void handlesCommitFailureWhenTheSqlCauseIsLost() {
+        var error = new TransactionSystemException("commit failed");
         var result = assertInstanceOf(DatabaseException.class, ServiceErrors.translate(error));
         assertSame(error, result.getCause());
-        assertFalse(result.getMessage().contains("private adapter details"));
+        assertFalse(result.getMessage().contains("commit failed"));
     }
 
     @Test

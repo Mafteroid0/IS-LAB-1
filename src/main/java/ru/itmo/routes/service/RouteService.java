@@ -1,22 +1,29 @@
 package ru.itmo.routes.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.routes.dto.Requests.RouteInput;
 import ru.itmo.routes.dto.Views.*;
+import ru.itmo.routes.error.InvalidInputException;
 import ru.itmo.routes.model.*;
 import ru.itmo.routes.repository.*;
-import ru.itmo.routes.error.*;
 import java.util.Set;
 
-@ApplicationScoped
-@TranslateServiceErrors
+@Service
 @Transactional
 public class RouteService {
-    @Inject private RouteRepository routes;
-    @Inject private ReferenceRepository references;
-    @Inject private WriteCoordinator changes;
+    private final RouteRepository routes;
+    private final CoordinatesRepository coordinates;
+    private final LocationRepository locations;
+    private final WriteCoordinator changes;
+
+    public RouteService(RouteRepository routes, CoordinatesRepository coordinates,
+                        LocationRepository locations, WriteCoordinator changes) {
+        this.routes = routes;
+        this.coordinates = coordinates;
+        this.locations = locations;
+        this.changes = changes;
+    }
 
     public Page<RouteView> list(int page, int size, String name, String fromName, String toName,
                                 String sort, String direction) {
@@ -40,8 +47,7 @@ public class RouteService {
         changes.changed();
         Route value = new Route();
         apply(value, input);
-        routes.save(value);
-        routes.flush();
+        routes.saveAndFlush(value);
         return RouteView.of(value);
     }
 
@@ -58,18 +64,18 @@ public class RouteService {
         changes.changed();
         Route value = require(id);
         Checks.version(value.getVersion(), version);
-        routes.remove(value);
+        routes.delete(value);
         routes.flush();
     }
 
     private Route require(long id) {
-        return Checks.found(routes.find(id), "Маршрут #" + id);
+        return Checks.found(routes.findById(id), "Маршрут #" + id);
     }
 
     private void apply(Route value, RouteInput input) {
-        Coordinates point = Checks.found(references.coordinates(input.coordinatesId), "Координаты #" + input.coordinatesId);
-        Location from = input.fromId == null ? null : Checks.found(references.location(input.fromId), "Локация #" + input.fromId);
-        Location to = Checks.found(references.location(input.toId), "Локация #" + input.toId);
+        Coordinates point = Checks.found(coordinates.findById(input.coordinatesId), "Координаты #" + input.coordinatesId);
+        Location from = input.fromId == null ? null : Checks.found(locations.findById(input.fromId), "Локация #" + input.fromId);
+        Location to = Checks.found(locations.findById(input.toId), "Локация #" + input.toId);
         value.change(input.name, point, from, to, input.distance, input.rating);
     }
 }

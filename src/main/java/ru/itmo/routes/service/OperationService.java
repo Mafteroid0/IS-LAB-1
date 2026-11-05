@@ -1,21 +1,29 @@
 package ru.itmo.routes.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.routes.dto.Requests.RouteInput;
 import ru.itmo.routes.dto.Views.*;
+import ru.itmo.routes.error.InvalidInputException;
 import ru.itmo.routes.repository.*;
-import ru.itmo.routes.error.*;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
-@ApplicationScoped
-@TranslateServiceErrors
+@Service
 @Transactional
 public class OperationService {
-    @Inject private OperationRepository operations;
-    @Inject private ReferenceRepository references;
-    @Inject private WriteCoordinator changes;
+    private final OperationRepository operations;
+    private final CoordinatesRepository coordinates;
+    private final LocationRepository locations;
+    private final WriteCoordinator changes;
+
+    public OperationService(OperationRepository operations, CoordinatesRepository coordinates,
+                            LocationRepository locations, WriteCoordinator changes) {
+        this.operations = operations;
+        this.coordinates = coordinates;
+        this.locations = locations;
+        this.changes = changes;
+    }
 
     public Average average() {
         return new Average(operations.average());
@@ -44,11 +52,11 @@ public class OperationService {
         changes.changed();
         requireLocation(input.fromId);
         requireLocation(input.toId);
-        Checks.found(references.coordinates(input.coordinatesId), "Координаты #" + input.coordinatesId);
+        Checks.found(coordinates.findById(input.coordinatesId), "Координаты #" + input.coordinatesId);
         return RouteView.of(operations.addBetween(input));
     }
 
     private void requireLocation(long id) {
-        Checks.found(references.location(id), "Локация #" + id);
+        Checks.found(locations.findById(id), "Локация #" + id);
     }
 }
