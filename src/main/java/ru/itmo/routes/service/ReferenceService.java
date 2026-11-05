@@ -16,9 +16,11 @@ public class ReferenceService {
     private final LocationRepository locations;
     private final RouteRepository routes;
     private final WriteCoordinator changes;
+    private final UniquenessRules rules;
 
     public ReferenceService(CoordinatesRepository coordinates, LocationRepository locations,
-                            RouteRepository routes, WriteCoordinator changes) {
+                            RouteRepository routes, WriteCoordinator changes, UniquenessRules rules) {
+        this.rules = rules;
         this.coordinates = coordinates;
         this.locations = locations;
         this.routes = routes;
@@ -35,6 +37,7 @@ public class ReferenceService {
 
     public Coordinate createCoordinates(CoordinatesInput input) {
         changes.changed();
+        rules.coordinates(input.x, input.y, 0);
         return Coordinate.of(coordinates.saveAndFlush(new Coordinates(input.x, input.y)));
     }
 
@@ -42,6 +45,7 @@ public class ReferenceService {
         changes.changed();
         Coordinates value = requireCoordinates(id);
         Checks.version(value.getVersion(), input.version);
+        rules.coordinates(input.x, input.y, id);
         value.change(input.x, input.y);
         coordinates.flush();
         return Coordinate.of(value);
@@ -49,6 +53,7 @@ public class ReferenceService {
 
     public Place createLocation(LocationInput input) {
         changes.changed();
+        rules.locationName(input.name, 0);
         return Place.of(locations.saveAndFlush(new Location(input.x, input.y, input.z, input.name)));
     }
 
@@ -56,6 +61,7 @@ public class ReferenceService {
         changes.changed();
         Location value = requireLocation(id);
         Checks.version(value.getVersion(), input.version);
+        rules.locationName(input.name, id);
         value.change(input.x, input.y, input.z, input.name);
         locations.flush();
         return Place.of(value);

@@ -7,6 +7,7 @@ import ru.itmo.routes.dto.Views.*;
 import ru.itmo.routes.error.InvalidInputException;
 import ru.itmo.routes.model.*;
 import ru.itmo.routes.repository.*;
+import org.springframework.transaction.annotation.Isolation;
 import java.util.Set;
 
 @Service
@@ -16,15 +17,19 @@ public class RouteService {
     private final CoordinatesRepository coordinates;
     private final LocationRepository locations;
     private final WriteCoordinator changes;
+    private final UniquenessRules rules;
 
     public RouteService(RouteRepository routes, CoordinatesRepository coordinates,
-                        LocationRepository locations, WriteCoordinator changes) {
+                        LocationRepository locations, WriteCoordinator changes, UniquenessRules rules) {
+        this.rules = rules;
         this.routes = routes;
         this.coordinates = coordinates;
         this.locations = locations;
         this.changes = changes;
     }
 
+    /** count и выборка — два запроса: REPEATABLE READ даёт им один снимок, и total согласован со страницей. */
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public Page<RouteView> list(int page, int size, String name, String fromName, String toName,
                                 String sort, String direction) {
         if (page < 0 || page > Integer.MAX_VALUE / 100 || size < 1 || size > 100)
@@ -45,6 +50,7 @@ public class RouteService {
 
     public RouteView create(RouteInput input) {
         changes.changed();
+        rules.routeName(input.name, 0);
         Route value = new Route();
         apply(value, input);
         routes.saveAndFlush(value);
@@ -55,6 +61,7 @@ public class RouteService {
         changes.changed();
         Route value = require(id);
         Checks.version(value.getVersion(), input.version);
+        rules.routeName(input.name, id);
         apply(value, input);
         routes.flush();
         return RouteView.of(value);
