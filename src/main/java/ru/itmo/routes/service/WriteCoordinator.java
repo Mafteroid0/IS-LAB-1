@@ -1,22 +1,25 @@
 package ru.itmo.routes.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.PersistenceContext;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.routes.model.State;
 
-@ApplicationScoped
-@TranslateServiceErrors
+/** Сериализует записи и увеличивает ревизию данных, по которой клиент узнаёт об изменениях. */
+@Service
 public class WriteCoordinator {
-    @PersistenceContext(unitName = "routes")
+    @PersistenceContext
     private EntityManager em;
 
-    @Transactional(Transactional.TxType.MANDATORY)
+    @Transactional(propagation = Propagation.MANDATORY)
     public void changed() {
         em.find(State.class, 1, LockModeType.PESSIMISTIC_WRITE).advance();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public String revision() {
         return Long.toString(em.find(State.class, 1).getRevision());
     }

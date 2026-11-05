@@ -2,7 +2,6 @@ package ru.itmo.routes.dto;
 
 import ru.itmo.routes.model.*;
 import java.util.List;
-import jakarta.json.bind.annotation.JsonbNillable;
 
 public final class Views {
     private Views() {
@@ -22,7 +21,6 @@ public final class Views {
         }
     }
 
-    @JsonbNillable
     public record RouteView(String id, String name, Coordinate coordinates, String creationDate,
                             Place from, Place to, Float distance, float rating, String version) {
         public static RouteView of(Route value) {
@@ -35,7 +33,6 @@ public final class Views {
     public record Page<T>(List<T> items, long total, int page, int size) {
     }
 
-    @JsonbNillable
     public record Average(Double value) {
     }
 }

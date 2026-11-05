@@ -1,37 +1,41 @@
 package ru.itmo.routes.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.routes.dto.Requests.*;
 import ru.itmo.routes.dto.Views.*;
+import ru.itmo.routes.error.*;
 import ru.itmo.routes.model.*;
 import ru.itmo.routes.repository.*;
-import ru.itmo.routes.error.*;
 import java.util.List;
 
-@ApplicationScoped
-@TranslateServiceErrors
+@Service
 @Transactional
 public class ReferenceService {
-    @Inject private ReferenceRepository references;
-    @Inject private RouteRepository routes;
-    @Inject private WriteCoordinator changes;
+    private final CoordinatesRepository coordinates;
+    private final LocationRepository locations;
+    private final RouteRepository routes;
+    private final WriteCoordinator changes;
+
+    public ReferenceService(CoordinatesRepository coordinates, LocationRepository locations,
+                            RouteRepository routes, WriteCoordinator changes) {
+        this.coordinates = coordinates;
+        this.locations = locations;
+        this.routes = routes;
+        this.changes = changes;
+    }
 
     public List<Coordinate> coordinates() {
-        return references.coordinates().stream().map(Coordinate::of).toList();
+        return coordinates.findAllByOrderByIdAsc().stream().map(Coordinate::of).toList();
     }
 
     public List<Place> locations() {
-        return references.locations().stream().map(Place::of).toList();
+        return locations.findAllByOrderByNameAscIdAsc().stream().map(Place::of).toList();
     }
 
     public Coordinate createCoordinates(CoordinatesInput input) {
         changes.changed();
-        Coordinates value = new Coordinates(input.x, input.y);
-        references.save(value);
-        references.flush();
-        return Coordinate.of(value);
+        return Coordinate.of(coordinates.saveAndFlush(new Coordinates(input.x, input.y)));
     }
 
     public Coordinate updateCoordinates(long id, CoordinatesInput input) {
@@ -39,16 +43,13 @@ public class ReferenceService {
         Coordinates value = requireCoordinates(id);
         Checks.version(value.getVersion(), input.version);
         value.change(input.x, input.y);
-        references.flush();
+        coordinates.flush();
         return Coordinate.of(value);
     }
 
     public Place createLocation(LocationInput input) {
         changes.changed();
-        Location value = new Location(input.x, input.y, input.z, input.name);
-        references.save(value);
-        references.flush();
-        return Place.of(value);
+        return Place.of(locations.saveAndFlush(new Location(input.x, input.y, input.z, input.name)));
     }
 
     public Place updateLocation(long id, LocationInput input) {
@@ -56,18 +57,18 @@ public class ReferenceService {
         Location value = requireLocation(id);
         Checks.version(value.getVersion(), input.version);
         value.change(input.x, input.y, input.z, input.name);
-        references.flush();
+        locations.flush();
         return Place.of(value);
     }
 
     public long coordinatesUsage(long id) {
         requireCoordinates(id);
-        return routes.byCoordinates(id).size();
+        return routes.findByCoordinates(id).size();
     }
 
     public long locationUsage(long id) {
         requireLocation(id);
-        return routes.byLocation(id).size();
+        return routes.findByLocation(id).size();
     }
 
     public void deleteCoordinates(long id, Long version, Long replacementId) {
@@ -76,12 +77,12 @@ public class ReferenceService {
         Checks.version(value.getVersion(), version);
         checkReplacement(id, replacementId);
         Coordinates replacement = replacementId == null ? null : requireCoordinates(replacementId);
-        List<Route> linked = routes.byCoordinates(id);
+        List<Route> linked = routes.findByCoordinates(id);
         requireReplacement(linked, replacement);
         linked.forEach(route -> route.moveCoordinates(replacement));
         routes.flush();
-        references.remove(value);
-        references.flush();
+        coordinates.delete(value);
+        coordinates.flush();
     }
 
     public void deleteLocation(long id, Long version, Long replacementId) {
@@ -90,20 +91,20 @@ public class ReferenceService {
         Checks.version(value.getVersion(), version);
         checkReplacement(id, replacementId);
         Location replacement = replacementId == null ? null : requireLocation(replacementId);
-        List<Route> linked = routes.byLocation(id);
+        List<Route> linked = routes.findByLocation(id);
         requireReplacement(linked, replacement);
         linked.forEach(route -> route.replaceLocation(id, replacement));
         routes.flush();
-        references.remove(value);
-        references.flush();
+        locations.delete(value);
+        locations.flush();
     }
 
     private Coordinates requireCoordinates(long id) {
-        return Checks.found(references.coordinates(id), "Координаты #" + id);
+        return Checks.found(coordinates.findById(id), "Координаты #" + id);
     }
 
     private Location requireLocation(long id) {
-        return Checks.found(references.location(id), "Локация #" + id);
+        return Checks.found(locations.findById(id), "Локация #" + id);
     }
 
     private void checkReplacement(long id, Long replacementId) {

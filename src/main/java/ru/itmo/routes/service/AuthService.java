@@ -1,33 +1,32 @@
 package ru.itmo.routes.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.itmo.routes.dto.Requests.Credentials;
+import ru.itmo.routes.error.ConflictException;
 import ru.itmo.routes.model.Account;
 import ru.itmo.routes.repository.AccountRepository;
-import ru.itmo.routes.dto.Requests.Credentials;
-import ru.itmo.routes.error.*;
 
-@ApplicationScoped
-@TranslateServiceErrors
+/** Регистрация учётных записей; вход выполняет Spring Security (AuthenticationManager). */
+@Service
 @Transactional
 public class AuthService {
-    @Inject private AccountRepository accounts;
-    @Inject private WriteCoordinator changes;
+    private final AccountRepository accounts;
+    private final WriteCoordinator changes;
+    private final PasswordEncoder encoder;
 
-    public String register(Credentials input) {
-        String hash = Passwords.hash(input.password);
-        changes.changed();
-        if (accounts.find(input.username).isPresent()) throw new ConflictException("Логин уже занят");
-        accounts.save(new Account(input.username, hash));
-        return input.username;
+    public AuthService(AccountRepository accounts, WriteCoordinator changes, PasswordEncoder encoder) {
+        this.accounts = accounts;
+        this.changes = changes;
+        this.encoder = encoder;
     }
 
-    public String login(Credentials input) {
-        Account account = accounts.find(input.username)
-                .orElseThrow(() -> new UnauthorizedException("Неверный логин или пароль"));
-        if (!Passwords.matches(input.password, account.getPasswordHash()))
-            throw new UnauthorizedException("Неверный логин или пароль");
-        return account.getUsername();
+    public String register(Credentials input) {
+        String hash = encoder.encode(input.password);
+        changes.changed();
+        if (accounts.findByUsername(input.username).isPresent()) throw new ConflictException("Логин уже занят");
+        accounts.saveAndFlush(new Account(input.username, hash));
+        return input.username;
     }
 }
