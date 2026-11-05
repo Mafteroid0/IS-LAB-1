@@ -27,7 +27,7 @@
     <header>
       <a class="brand" href="#routes"><span class="brand-mark small">R</span>Маршруты</a>
       <nav aria-label="Основное меню">
-        <a href="#routes">Реестр</a><a href="#coordinates">Координаты</a><a href="#locations">Локации</a><a href="#operations">Операции</a>
+        <a href="#routes">Реестр</a><a href="#coordinates">Координаты</a><a href="#locations">Локации</a><a href="#operations">Операции</a><a href="#imports">Импорт</a>
       </nav>
       <div class="account"><span id="username"></span><button id="logout" class="plain">Выйти</button></div>
     </header>
@@ -55,6 +55,28 @@
         <div class="section-heading"><div><p class="eyebrow">СВЯЗАННЫЕ ОБЪЕКТЫ</p><h1>Локации</h1></div><button id="new-location">+ Добавить локацию</button></div>
         <p class="muted">Локация может быть отправлением и назначением разных маршрутов. Изменение локации отразится во всех связанных маршрутах.</p>
         <div id="locations-table" class="table-wrap"></div>
+      </section>
+      <section id="imports-section" hidden>
+        <div class="section-heading"><div><p class="eyebrow">МАССОВОЕ ДОБАВЛЕНИЕ</p><h1>Импорт маршрутов</h1></div></div>
+        <form id="import-form" class="operation-card import-card">
+          <h2>Загрузить файл</h2>
+          <p>JSON-массив маршрутов. Координаты и локации задаются внутри записи маршрута. Импорт выполняется целиком: при любой ошибке не будет создан ни один объект.</p>
+          <label>Файл (.json, до 5 МБ, до 1000 записей)<input name="file" type="file" accept=".json,application/json" required></label>
+          <details><summary>Формат файла</summary><pre>[
+  {
+    "name": "Маршрут 1",
+    "coordinates": { "x": 1.5, "y": 2.5 },
+    "from": { "x": 0, "y": 0, "z": 0, "name": "Старт" },
+    "to":   { "x": 5, "y": 5, "z": 1, "name": "Финиш" },
+    "distance": 10.5,
+    "rating": 4
+  }
+]</pre><p class="muted">Поле from необязательно. Название маршрута и локации, а также пара координат (x, y) уникальны: совпавшие координаты и локации с теми же значениями используются повторно.</p></details>
+          <p id="import-error" class="error" role="alert"></p>
+          <button>Импортировать</button>
+        </form>
+        <h2 class="history-title">История импорта <span class="muted" id="import-scope"></span></h2>
+        <div id="imports-table" class="table-wrap"></div>
       </section>
       <section id="operations-section" hidden>
         <div class="section-heading"><div><p class="eyebrow">СПЕЦИАЛЬНЫЕ ДЕЙСТВИЯ</p><h1>Операции с маршрутами</h1></div></div>
