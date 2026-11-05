@@ -35,4 +35,13 @@ public final class Views {
 
     public record Average(Double value) {
     }
+
+    /** Строка истории импорта; added заполнено только для успешных операций. */
+    public record ImportView(String id, String status, String username, Integer added, String message,
+                             String createdAt) {
+        public static ImportView of(ImportRecord value) {
+            return new ImportView(value.getId().toString(), value.getStatus(), value.getUsername(),
+                    value.getAddedCount(), value.getMessage(), value.getCreatedAt().toString());
+        }
+    }
 }
