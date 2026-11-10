@@ -20,6 +20,9 @@ label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-w
 label small { font-weight: 400; color: #718096; }
 .error { color: #ae272f; white-space: pre-line; }
 .muted { color: #718096; }
+.import-card { max-width: 640px; display: grid; gap: 14px; margin-bottom: 32px; }
+.import-card pre { background: #f1f5f9; padding: 12px; border-radius: 6px; overflow-x: auto; }
+.history-title { margin-top: 8px; }
 .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; color: #738397; margin-bottom: 8px; }
 .brand-mark { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 13px; background: var(--accent); color: white; font-weight: 700; font-size: 30px; margin-bottom: 28px; }
 .brand-mark.small { width: 32px; height: 32px; border-radius: 8px; font-size: 21px; margin: 0; }

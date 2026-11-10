@@ -15,7 +15,23 @@ export async function api(path, method = 'GET', body) {
   return result;
 }
 
-export const escape = value => String(value ?? '—').replace(/[&<>"']/g, char => ({
+export async function upload(path, file) {
+  const form = new FormData();
+  form.append('file', file);
+  const response = await fetch(`api${path}`, {
+    method: 'POST', credentials: 'same-origin', headers: { 'X-Requested-With': 'RouteLab' }, body: form
+  });
+  const result = await response.json();
+  if (!response.ok) {
+    const fields = Object.entries(result.fields || {}).map(([field, message]) => `${field}: ${message}`);
+    const error = new Error([result.message || 'Ошибка запроса', ...fields].join('\n'));
+    error.status = response.status;
+    throw error;
+  }
+  return result;
+}
+
+export const escape =value => String(value ?? '—').replace(/[&<>"']/g, char => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 })[char]);
 

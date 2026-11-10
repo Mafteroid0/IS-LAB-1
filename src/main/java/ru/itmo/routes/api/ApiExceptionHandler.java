@@ -33,6 +33,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleApplication(Exception error) {
         Exception cause = ServiceErrors.translate(error);
+        if (cause instanceof ImportRejectedException rejected) return reply(400, rejected.getMessage(), rejected.fields());
         if (cause instanceof InvalidInputException) return reply(400, cause.getMessage());
         if (cause instanceof ResourceNotFoundException) return reply(404, cause.getMessage());
         if (cause instanceof ConflictException) return reply(409, cause.getMessage());

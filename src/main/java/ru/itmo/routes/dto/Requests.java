@@ -1,5 +1,6 @@
 package ru.itmo.routes.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import ru.itmo.routes.validation.Finite;
 
@@ -45,6 +46,23 @@ public final class Requests {
         public String name;
         @PositiveOrZero
         public Long version;
+    }
+
+    /** Запись файла импорта: вложенные объекты задаются в той же записи. */
+    public static class RouteImport {
+        @NotBlank(message = "Укажите название маршрута")
+        public String name;
+        @NotNull @Valid
+        public CoordinatesInput coordinates;
+        @Valid
+        public LocationInput from;
+        @NotNull @Valid
+        public LocationInput to;
+        @NotNull @Finite
+        @DecimalMin(value = "1", inclusive = false, message = "Расстояние должно быть больше 1")
+        public Float distance;
+        @NotNull @Finite @Positive
+        public Float rating;
     }
 
     public static class Credentials {

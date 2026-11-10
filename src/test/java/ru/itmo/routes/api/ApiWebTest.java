@@ -15,7 +15,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.TransactionSystemException;
+import org.springframework.mock.web.MockMultipartFile;
+import ru.itmo.routes.dto.Views.ImportView;
 import ru.itmo.routes.error.ConflictException;
+import ru.itmo.routes.error.ImportRejectedException;
+import ru.itmo.routes.security.Roles;
+import ru.itmo.routes.service.ImportService;
+import java.util.List;
+import java.util.Map;
 import ru.itmo.routes.error.ResourceNotFoundException;
 import ru.itmo.routes.model.Account;
 import ru.itmo.routes.repository.AccountRepository;
@@ -30,12 +37,14 @@ import java.util.Optional;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = {RouteController.class, AuthController.class, StateController.class})
-@Import({SecurityConfig.class, AccountUserDetailsService.class})
+@WebMvcTest(controllers = {RouteController.class, AuthController.class, StateController.class, ImportController.class})
+@Import({SecurityConfig.class, AccountUserDetailsService.class, Roles.class})
 @ImportAutoConfiguration(MessageSourceAutoConfiguration.class)
 class ApiWebTest {
     @Autowired MockMvc mvc;
@@ -43,6 +52,7 @@ class ApiWebTest {
     @MockitoBean AuthService auth;
     @MockitoBean WriteCoordinator changes;
     @MockitoBean AccountRepository accounts;
+    @MockitoBean ImportService imports;
 
     private static MockHttpServletRequestBuilder json(MockHttpServletRequestBuilder request, String body) {
         return request.header("X-Requested-With", "RouteLab").contentType(MediaType.APPLICATION_JSON).content(body);
@@ -183,6 +193,78 @@ class ApiWebTest {
     void answersUnknownPathWithJsonNotFound() throws Exception {
         mvc.perform(get("/api/unknown")).andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message").value("Ресурс не найден"));
+    }
+
+    private static MockMultipartFile file(String content) {
+        return new MockMultipartFile("file", "routes.json", "application/json", content.getBytes());
+    }
+
+    @Test
+    @WithMockUser(username = "alice")
+    void uploadsImportFileAndReturnsHistoryRow() throws Exception {
+        when(imports.run(eq("alice"), any())).thenReturn(
+                new ImportView("7", "SUCCESS", "alice", 3, null, "2026-01-01T00:00:00"));
+        mvc.perform(multipart("/api/imports").file(file("[]")).header("X-Requested-With", "RouteLab"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value("7"))
+                .andExpect(jsonPath("$.added").value(3));
+    }
+
+    @Test
+    @WithMockUser(username = "alice")
+    void reportsRejectedImportFieldsAndEmptyFile() throws Exception {
+        when(imports.run(eq("alice"), any())).thenThrow(new ImportRejectedException("Импорт отклонён",
+                Map.of("запись 2: name", "Укажите название маршрута")));
+        mvc.perform(multipart("/api/imports").file(file("[{}]")).header("X-Requested-With", "RouteLab"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Импорт отклонён"))
+                .andExpect(jsonPath("$.fields['запись 2: name']").value("Укажите название маршрута"));
+        mvc.perform(multipart("/api/imports").file(file("")).header("X-Requested-With", "RouteLab"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Выберите непустой файл"));
+    }
+
+    @Test
+    @WithMockUser(username = "alice")
+    void rejectsImportWithoutRequestedWithHeader() throws Exception {
+        mvc.perform(multipart("/api/imports").file(file("[]"))).andExpect(status().isForbidden());
+    }
+
+    @Test
+    void importHistoryRequiresSignIn() throws Exception {
+        mvc.perform(get("/api/imports")).andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "alice")
+    void ordinaryUserAsksForOwnHistoryOnly() throws Exception {
+        when(imports.history("alice", false)).thenReturn(List.of(
+                new ImportView("1", "FAILED", "alice", null, "ошибка", "2026-01-01T00:00:00")));
+        mvc.perform(get("/api/imports")).andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].username").value("alice"))
+                .andExpect(jsonPath("$[0].added").doesNotExist());
+        verify(imports).history("alice", false);
+    }
+
+    @Test
+    @WithMockUser(username = "boss", roles = "ADMIN")
+    void administratorAsksForAllHistory() throws Exception {
+        when(imports.history("boss", true)).thenReturn(List.of());
+        mvc.perform(get("/api/imports")).andExpect(status().isOk());
+        verify(imports).history("boss", true);
+    }
+
+    @Test
+    void loginReportsRoleFromConfiguration() throws Exception {
+        when(accounts.findByUsername("admin")).thenReturn(Optional.of(
+                new Account("admin", Passwords.hash("password123"))));
+        mvc.perform(json(post("/api/auth/login"), "{\"username\":\"admin\",\"password\":\"password123\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.role").value("ADMIN"));
+        when(accounts.findByUsername("alice")).thenReturn(Optional.of(
+                new Account("alice", Passwords.hash("password123"))));
+        mvc.perform(json(post("/api/auth/login"), "{\"username\":\"alice\",\"password\":\"password123\"}"))
+                .andExpect(jsonPath("$.role").value("USER"));
     }
 
     @Test

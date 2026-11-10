@@ -1,4 +1,4 @@
-import { api, escape as e, positiveLong } from './api.js';
+import { api, upload, escape as e, positiveLong } from './api.js';
 
 const $ = selector => document.querySelector(selector);
 const state = { page: 0, size: 10, sort: 'id', direction: 'asc', filters: {}, coordinates: [], locations: [], user: null, revision: null, modal: null, query: null, syncing: false, tableRequest: 0 };
@@ -263,6 +263,7 @@ async function sync(force = false) {
       await refreshModal();
       state.revision = result.revision;
     }
+    if (!$('#imports-section').hidden) await loadImports();
     $('#sync-status').textContent = 'Автообновление · каждые 2 секунды';
   } catch (error) {
     $('#sync-status').textContent = 'Нет связи · повторное подключение…';
@@ -270,8 +271,19 @@ async function sync(force = false) {
   } finally { state.syncing = false; }
 }
 
+const importStatus = { SUCCESS: 'Успешно', FAILED: 'Ошибка' };
+
+async function loadImports() {
+  const items = await api('/imports');
+  $('#import-scope').textContent = state.admin ? '· все пользователи' : '· только ваши операции';
+  $('#imports-table').innerHTML = items.length ? `<table><thead><tr><th>ID операции</th><th>Статус</th><th>Пользователь</th><th>Добавлено объектов</th><th>Время</th><th>Сообщение</th></tr></thead><tbody>${items.map(item => `<tr>
+    <td>${e(item.id)}</td><td>${e(importStatus[item.status] || item.status)}</td><td>${e(item.username)}</td>
+    <td>${item.status === 'SUCCESS' ? e(item.added) : '—'}</td><td>${e(date(item.createdAt))}</td><td>${e(item.message)}</td>
+  </tr>`).join('')}</tbody></table>` : '<div class="empty">Операций импорта пока нет</div>';
+}
+
 function navigate() {
-  const sections = ['routes', 'coordinates', 'locations', 'operations'];
+  const sections = ['routes', 'coordinates', 'locations', 'operations', 'imports'];
   const section = sections.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'routes';
   for (const name of sections) {
     $(`#${name}-section`).hidden = name !== section;
@@ -281,6 +293,7 @@ function navigate() {
 
 async function signedIn(user) {
   state.user = user.username;
+  state.admin = user.role === 'ADMIN';
   state.revision = null;
   $('#username').textContent = user.username;
   $('#auth').hidden = true;
@@ -302,7 +315,25 @@ $('#auth-form').addEventListener('submit', event => {
     form.querySelectorAll('button').forEach(button => { button.disabled = false; });
   });
 });
-$('#logout').onclick = () => run(async () => { await api('/auth/logout', 'POST'); showAuth(); });
+$('#import-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const form = event.target;
+  const file = form.elements.file.files[0];
+  const button = event.submitter;
+  $('#import-error').textContent = '';
+  button.disabled = true;
+  run(async () => {
+    const result = await upload('/imports', file);
+    form.reset();
+    notify(`Импорт #${result.id} завершён: добавлено маршрутов — ${result.added}`);
+    await sync(true);
+    await loadImports();
+  }, $('#import-error')).finally(async () => {
+    button.disabled = false;
+    try { await loadImports(); } catch (error) { /* история обновится при следующем опросе */ }
+  });
+});
+$('#logout').onclick =() => run(async () => { await api('/auth/logout', 'POST'); showAuth(); });
 $('#refresh').onclick = () => sync(true);
 $('#close-modal').onclick = closeModal;
 $('#modal').addEventListener('close', () => { state.modal = null; });

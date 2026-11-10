@@ -6,6 +6,7 @@ import ru.itmo.routes.dto.Requests.RouteInput;
 import ru.itmo.routes.dto.Views.*;
 import ru.itmo.routes.error.InvalidInputException;
 import ru.itmo.routes.repository.*;
+import org.springframework.transaction.annotation.Isolation;
 import java.util.List;
 import java.util.Set;
 
@@ -16,9 +17,11 @@ public class OperationService {
     private final CoordinatesRepository coordinates;
     private final LocationRepository locations;
     private final WriteCoordinator changes;
+    private final UniquenessRules rules;
 
     public OperationService(OperationRepository operations, CoordinatesRepository coordinates,
-                            LocationRepository locations, WriteCoordinator changes) {
+                            LocationRepository locations, WriteCoordinator changes, UniquenessRules rules) {
+        this.rules = rules;
         this.operations = operations;
         this.coordinates = coordinates;
         this.locations = locations;
@@ -37,6 +40,8 @@ public class OperationService {
         return operations.contains(part).stream().map(RouteView::of).toList();
     }
 
+    /** Проверка локаций и выборка — разные запросы; один снимок исключает «исчезнувшую» между ними локацию. */
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public List<RouteView> between(long fromId, long toId, String sort, String direction) {
         if (!Set.of("id", "name", "creationDate", "distance", "rating").contains(sort))
             throw new InvalidInputException("Сортировка: id, name, creationDate, distance или rating");
@@ -50,6 +55,7 @@ public class OperationService {
     public RouteView addBetween(RouteInput input) {
         if (input.fromId == null) throw new InvalidInputException("Укажите локацию отправления");
         changes.changed();
+        rules.routeName(input.name, 0);
         requireLocation(input.fromId);
         requireLocation(input.toId);
         Checks.found(coordinates.findById(input.coordinatesId), "Координаты #" + input.coordinatesId);
