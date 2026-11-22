@@ -73,9 +73,13 @@
   }
 ]</pre><p class="muted">Поле from необязательно. Название маршрута и локации, а также пара координат (x, y) уникальны: совпавшие координаты и локации с теми же значениями используются повторно.</p></details>
           <p id="import-error" class="error" role="alert"></p>
-          <button>Импортировать</button>
+          <button type="submit">Импортировать</button>
         </form>
         <h2 class="history-title">История импорта <span class="muted" id="import-scope"></span></h2>
+        <div class="actions import-history-actions">
+          <button type="button" id="imports-newer" disabled>Новые</button>
+          <button type="button" id="imports-older" disabled>Более ранние</button>
+        </div>
         <div id="imports-table" class="table-wrap"></div>
       </section>
       <section id="operations-section" hidden>

@@ -1,8 +1,13 @@
 package ru.itmo.routes.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.cfg.CoercionAction;
+import com.fasterxml.jackson.databind.cfg.CoercionInputShape;
+import com.fasterxml.jackson.databind.type.LogicalType;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
@@ -53,8 +58,15 @@ public class ImportService {
                          RouteRepository routes, CoordinatesRepository coordinates, LocationRepository locations,
                          ImportRepository history, WriteCoordinator changes, UniquenessRules rules) {
         this.mapper = mapper.copy()
+                .enable(JsonParser.Feature.STRICT_DUPLICATE_DETECTION)
                 .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);
+                .enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS)
+                .disable(DeserializationFeature.ACCEPT_FLOAT_AS_INT)
+                .disable(MapperFeature.ALLOW_COERCION_OF_SCALARS);
+        this.mapper.coercionConfigFor(LogicalType.Textual)
+                .setCoercion(CoercionInputShape.Integer, CoercionAction.Fail)
+                .setCoercion(CoercionInputShape.Float, CoercionAction.Fail)
+                .setCoercion(CoercionInputShape.Boolean, CoercionAction.Fail);
         this.validator = validator;
         this.routes = routes;
         this.coordinates = coordinates;
@@ -81,13 +93,14 @@ public class ImportService {
         }
     }
 
-    public List<ImportView> history(String username, boolean all) {
-        List<ImportRecord> records = all ? history.findTop200ByOrderByIdDesc()
-                : history.findTop200ByUsernameOrderByIdDesc(username);
+    public List<ImportView> history(String username, boolean all, long before) {
+        List<ImportRecord> records = all ? history.findTop200ByIdLessThanOrderByIdDesc(before)
+                : history.findTop200ByUsernameAndIdLessThanOrderByIdDesc(username, before);
         return records.stream().map(ImportView::of).toList();
     }
 
     private List<RouteImport> parse(byte[] content) {
+        if (content.length == 0) throw new InvalidInputException("Выберите непустой файл");
         try {
             return mapper.readValue(content, new TypeReference<List<RouteImport>>() {
             });
@@ -97,7 +110,7 @@ public class ImportService {
     }
 
     private void check(List<RouteImport> items) {
-        if (items.isEmpty()) throw new InvalidInputException("Файл не содержит ни одной записи");
+        if (items == null || items.isEmpty()) throw new InvalidInputException("Файл не содержит ни одной записи");
         if (items.size() > MAX_RECORDS)
             throw new InvalidInputException("В файле больше " + MAX_RECORDS + " записей");
         Map<String, String> fields = new LinkedHashMap<>();
@@ -150,7 +163,7 @@ public class ImportService {
         List<Location> same = rules.sameLocations(input.name);
         if (same.isEmpty()) return locations.saveAndFlush(new Location(input.x, input.y, input.z, input.name));
         Location existing = same.get(0);
-        if (existing.getX().equals(input.x) && existing.getY() == input.y && existing.getZ() == input.z)
+        if (existing.getX().floatValue() == input.x && existing.getY() == input.y && existing.getZ() == input.z)
             return existing;
         throw new ConflictException("Локация «" + input.name.strip() + "» уже существует с другими параметрами");
     }

@@ -19,6 +19,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import ru.itmo.routes.dto.Views.ImportView;
 import ru.itmo.routes.error.ConflictException;
 import ru.itmo.routes.error.ImportRejectedException;
+import ru.itmo.routes.error.InvalidInputException;
 import ru.itmo.routes.security.Roles;
 import ru.itmo.routes.service.ImportService;
 import java.util.List;
@@ -43,7 +44,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = {RouteController.class, AuthController.class, StateController.class, ImportController.class})
+@WebMvcTest(controllers = {RouteController.class, AuthController.class, StateController.class, ImportController.class},
+        properties = "app.admins=admin")
 @Import({SecurityConfig.class, AccountUserDetailsService.class, Roles.class})
 @ImportAutoConfiguration(MessageSourceAutoConfiguration.class)
 class ApiWebTest {
@@ -219,6 +221,8 @@ class ApiWebTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("Импорт отклонён"))
                 .andExpect(jsonPath("$.fields['запись 2: name']").value("Укажите название маршрута"));
+        when(imports.run(eq("alice"), eq(new byte[0])))
+                .thenThrow(new InvalidInputException("Выберите непустой файл"));
         mvc.perform(multipart("/api/imports").file(file("")).header("X-Requested-With", "RouteLab"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("Выберите непустой файл"));
@@ -238,20 +242,20 @@ class ApiWebTest {
     @Test
     @WithMockUser(username = "alice")
     void ordinaryUserAsksForOwnHistoryOnly() throws Exception {
-        when(imports.history("alice", false)).thenReturn(List.of(
+        when(imports.history("alice", false, Long.MAX_VALUE)).thenReturn(List.of(
                 new ImportView("1", "FAILED", "alice", null, "ошибка", "2026-01-01T00:00:00")));
         mvc.perform(get("/api/imports")).andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].username").value("alice"))
                 .andExpect(jsonPath("$[0].added").doesNotExist());
-        verify(imports).history("alice", false);
+        verify(imports).history("alice", false, Long.MAX_VALUE);
     }
 
     @Test
     @WithMockUser(username = "boss", roles = "ADMIN")
     void administratorAsksForAllHistory() throws Exception {
-        when(imports.history("boss", true)).thenReturn(List.of());
-        mvc.perform(get("/api/imports")).andExpect(status().isOk());
-        verify(imports).history("boss", true);
+        when(imports.history("boss", true, 215)).thenReturn(List.of());
+        mvc.perform(get("/api/imports").param("before", "215")).andExpect(status().isOk());
+        verify(imports).history("boss", true, 215);
     }
 
     @Test

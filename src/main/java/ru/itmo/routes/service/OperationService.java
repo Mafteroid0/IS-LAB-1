@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Transactional
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class OperationService {
     private final OperationRepository operations;
     private final CoordinatesRepository coordinates;
@@ -36,6 +36,7 @@ public class OperationService {
         return operations.countLess(rating);
     }
 
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public List<RouteView> contains(String part) {
         return operations.contains(part).stream().map(RouteView::of).toList();
     }

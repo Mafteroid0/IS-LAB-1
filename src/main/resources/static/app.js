@@ -263,7 +263,9 @@ async function sync(force = false) {
       await refreshModal();
       state.revision = result.revision;
     }
-    if (!$('#imports-section').hidden) await loadImports();
+    if (!$('#imports-section').hidden && !importPages.loading && (force || importPages.cursors.length === 1)) {
+      await loadImports();
+    }
     $('#sync-status').textContent = 'Автообновление · каждые 2 секунды';
   } catch (error) {
     $('#sync-status').textContent = 'Нет связи · повторное подключение…';
@@ -272,9 +274,26 @@ async function sync(force = false) {
 }
 
 const importStatus = { SUCCESS: 'Успешно', FAILED: 'Ошибка' };
+const importPages = { cursors: [''], request: 0, loading: false };
 
-async function loadImports() {
-  const items = await api('/imports');
+async function loadImports(cursors = importPages.cursors) {
+  const request = ++importPages.request;
+  const user = state.user;
+  const before = cursors.at(-1);
+  importPages.loading = true;
+  const items = await api(before ? `/imports?before=${before}` : '/imports').finally(() => {
+    if (request === importPages.request) importPages.loading = false;
+  });
+  if (request !== importPages.request || user !== state.user) return;
+  if (before && !items.length) {
+    $('#imports-older').disabled = true;
+    return;
+  }
+  importPages.cursors = cursors;
+  const older = $('#imports-older');
+  older.disabled = items.length < 200;
+  older.dataset.before = items.at(-1)?.id ?? '';
+  $('#imports-newer').disabled = cursors.length === 1;
   $('#import-scope').textContent = state.admin ? '· все пользователи' : '· только ваши операции';
   $('#imports-table').innerHTML = items.length ? `<table><thead><tr><th>ID операции</th><th>Статус</th><th>Пользователь</th><th>Добавлено объектов</th><th>Время</th><th>Сообщение</th></tr></thead><tbody>${items.map(item => `<tr>
     <td>${e(item.id)}</td><td>${e(importStatus[item.status] || item.status)}</td><td>${e(item.username)}</td>
@@ -289,9 +308,14 @@ function navigate() {
     $(`#${name}-section`).hidden = name !== section;
     $(`nav a[href="#${name}"]`).classList.toggle('active', name === section);
   }
+  if (state.user && section === 'imports') run(() => loadImports());
 }
 
 async function signedIn(user) {
+  importPages.cursors = [''];
+  $('#imports-table').replaceChildren();
+  $('#imports-newer').disabled = true;
+  $('#imports-older').disabled = true;
   state.user = user.username;
   state.admin = user.role === 'ADMIN';
   state.revision = null;
@@ -321,18 +345,22 @@ $('#import-form').addEventListener('submit', event => {
   const file = form.elements.file.files[0];
   const button = event.submitter;
   $('#import-error').textContent = '';
+  $('#notice').hidden = true;
   button.disabled = true;
   run(async () => {
     const result = await upload('/imports', file);
     form.reset();
     notify(`Импорт #${result.id} завершён: добавлено маршрутов — ${result.added}`);
     await sync(true);
-    await loadImports();
   }, $('#import-error')).finally(async () => {
     button.disabled = false;
-    try { await loadImports(); } catch (error) { /* история обновится при следующем опросе */ }
+    if (state.user) {
+      try { await loadImports(['']); } catch (error) { /* история обновится при следующем опросе */ }
+    }
   });
 });
+$('#imports-older').onclick = event => run(() => loadImports([...importPages.cursors, event.target.dataset.before]));
+$('#imports-newer').onclick = () => run(() => loadImports(importPages.cursors.slice(0, -1)));
 $('#logout').onclick =() => run(async () => { await api('/auth/logout', 'POST'); showAuth(); });
 $('#refresh').onclick = () => sync(true);
 $('#close-modal').onclick = closeModal;

@@ -61,6 +61,8 @@ th button { padding: 0; color: #475569; background: none; }
 .operations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; margin-bottom: 32px; }
 .operation-card { padding: 24px; display: flex; flex-direction: column; gap: 15px; background: white; border: 1px solid var(--border); border-radius: 10px; }
 .operation-card p { color: #718096; font-size: 13px; flex: 1; margin: 0; }
+.operation-card p.error { color: #ae272f; }
+.import-history-actions { margin-bottom: 12px; }
 .operation-card h2 { margin: 0; }
 .operation-card button { align-self: start; margin-top: auto; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }

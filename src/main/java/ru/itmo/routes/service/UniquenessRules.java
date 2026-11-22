@@ -8,6 +8,7 @@ import ru.itmo.routes.repository.CoordinatesRepository;
 import ru.itmo.routes.repository.LocationRepository;
 import ru.itmo.routes.repository.RouteRepository;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Ограничения уникальности предметной области. Они проверяются только здесь, на уровне бизнес-логики,
@@ -33,12 +34,13 @@ public class UniquenessRules {
     }
 
     public void routeName(String name, long excluded) {
-        if (routes.nameTaken(name, excluded))
+        String key = name.strip();
+        if (routes.namesExcept(excluded).stream().anyMatch(value -> key.equalsIgnoreCase(value.strip())))
             throw new ConflictException("Маршрут с названием «" + name.strip() + "» уже существует");
     }
 
     public void locationName(String name, long excluded) {
-        if (!locations.findByNormalizedName(name, excluded).isEmpty())
+        if (locationMatches(name, excluded).findAny().isPresent())
             throw new ConflictException("Локация с названием «" + name.strip() + "» уже существует");
     }
 
@@ -49,7 +51,13 @@ public class UniquenessRules {
 
     /** Существующие локации с тем же названием (для импорта вложенных объектов). */
     public List<Location> sameLocations(String name) {
-        return locations.findByNormalizedName(name, 0);
+        return locationMatches(name, 0).toList();
+    }
+
+    private Stream<Location> locationMatches(String name, long excluded) {
+        String key = name.strip();
+        return locations.findForUniqueness(excluded).stream()
+                .filter(location -> key.equalsIgnoreCase(location.getName().strip()));
     }
 
     public List<Coordinates> sameCoordinates(float x, float y) {

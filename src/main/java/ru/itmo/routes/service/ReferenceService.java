@@ -1,6 +1,7 @@
 package ru.itmo.routes.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itmo.routes.dto.Requests.*;
 import ru.itmo.routes.dto.Views.*;
@@ -10,7 +11,7 @@ import ru.itmo.routes.repository.*;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class ReferenceService {
     private final CoordinatesRepository coordinates;
     private final LocationRepository locations;
@@ -67,11 +68,13 @@ public class ReferenceService {
         return Place.of(value);
     }
 
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public long coordinatesUsage(long id) {
         requireCoordinates(id);
         return routes.findByCoordinates(id).size();
     }
 
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public long locationUsage(long id) {
         requireLocation(id);
         return routes.findByLocation(id).size();

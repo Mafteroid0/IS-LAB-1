@@ -1,0 +1,337 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1795368170282,731,Initialize unique run data,200,OK,0. Initialize run 1-1,text,true,,4,0,1,1,null,0,0,0
+1795368171106,142,Register crud,201,,1. CRUD + import (USERS parallel users) 1-11,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,142,0,35
+1795368171106,147,Register crud,201,,1. CRUD + import (USERS parallel users) 1-10,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,147,0,35
+1795368171106,129,Register crud,201,,1. CRUD + import (USERS parallel users) 1-16,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,125,0,35
+1795368171106,129,Register crud,201,,1. CRUD + import (USERS parallel users) 1-15,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,126,0,35
+1795368171106,137,Register crud,201,,1. CRUD + import (USERS parallel users) 1-18,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,137,0,35
+1795368171106,129,Register crud,201,,1. CRUD + import (USERS parallel users) 1-14,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,125,0,36
+1795368171106,153,Register crud,201,,1. CRUD + import (USERS parallel users) 1-6,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,153,0,35
+1795368171106,181,Register crud,201,,1. CRUD + import (USERS parallel users) 1-1,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,180,0,35
+1795368171106,174,Register crud,201,,1. CRUD + import (USERS parallel users) 1-12,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,173,0,35
+1795368171106,130,Register crud,201,,1. CRUD + import (USERS parallel users) 1-13,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,130,0,35
+1795368171106,266,Register crud,201,,1. CRUD + import (USERS parallel users) 1-4,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,266,0,35
+1795368171106,267,Register crud,201,,1. CRUD + import (USERS parallel users) 1-8,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,267,0,35
+1795368171106,269,Register crud,201,,1. CRUD + import (USERS parallel users) 1-2,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,269,0,35
+1795368171106,273,Register crud,201,,1. CRUD + import (USERS parallel users) 1-20,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,273,0,35
+1795368171106,289,Register crud,201,,1. CRUD + import (USERS parallel users) 1-3,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,289,0,35
+1795368171106,296,Register crud,201,,1. CRUD + import (USERS parallel users) 1-5,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,296,0,36
+1795368171106,300,Register crud,201,,1. CRUD + import (USERS parallel users) 1-9,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,300,0,35
+1795368171292,105,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-15,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,104,0,0
+1795368171292,94,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-10,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,94,0,0
+1795368171292,119,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-16,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,119,0,0
+1795368171293,119,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-12,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,119,0,0
+1795368171374,40,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-8,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,40,0,0
+1795368171293,105,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-13,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,105,0,0
+1795368171292,111,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-14,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,111,0,0
+1795368171293,99,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-6,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,99,0,0
+1795368171293,90,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-1,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,90,0,0
+1795368171292,115,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-18,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,115,0,0
+1795368171292,98,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-11,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,98,0,0
+1795368171106,312,Register crud,201,,1. CRUD + import (USERS parallel users) 1-7,text,true,,475,285,20,20,http://localhost:18083/routes/api/auth/register,312,0,36
+1795368171374,45,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-4,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,45,0,0
+1795368171106,316,Register crud,201,,1. CRUD + import (USERS parallel users) 1-17,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,316,0,35
+1795368171376,48,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-2,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,48,0,0
+1795368171106,320,Register crud,201,,1. CRUD + import (USERS parallel users) 1-19,text,true,,476,286,20,20,http://localhost:18083/routes/api/auth/register,320,0,35
+1795368171380,48,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-20,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,48,0,0
+1795368171397,32,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-3,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,32,0,0
+1795368171404,26,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-5,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,26,0,0
+1795368171408,25,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-9,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,25,0,0
+1795368171416,22,Create location,201,,1. CRUD + import (USERS parallel users) 1-8,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,21,0,0
+1795368171416,25,Create location,201,,1. CRUD + import (USERS parallel users) 1-13,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,25,0,0
+1795368171416,28,Create location,201,,1. CRUD + import (USERS parallel users) 1-18,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,28,0,0
+1795368171416,32,Create location,201,,1. CRUD + import (USERS parallel users) 1-16,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,32,0,0
+1795368171416,36,Create location,201,,1. CRUD + import (USERS parallel users) 1-10,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,36,0,0
+1795368171416,40,Create location,201,,1. CRUD + import (USERS parallel users) 1-14,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,39,0,0
+1795368171416,42,Create location,201,,1. CRUD + import (USERS parallel users) 1-12,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,42,0,0
+1795368171416,44,Create location,201,,1. CRUD + import (USERS parallel users) 1-6,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,44,0,0
+1795368171416,48,Create location,201,,1. CRUD + import (USERS parallel users) 1-1,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,48,0,0
+1795368171431,37,Create location,201,,1. CRUD + import (USERS parallel users) 1-5,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,37,0,0
+1795368171416,54,Create location,201,,1. CRUD + import (USERS parallel users) 1-15,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,54,0,0
+1795368171419,54,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-7,text,true,,452,293,20,20,http://localhost:18083/routes/api/coordinates,54,0,0
+1795368171420,55,Create location,201,,1. CRUD + import (USERS parallel users) 1-4,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,55,0,0
+1795368171424,54,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-17,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,54,0,0
+1795368171424,57,Create location,201,,1. CRUD + import (USERS parallel users) 1-2,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,57,0,0
+1795368171428,56,Create coordinates,201,,1. CRUD + import (USERS parallel users) 1-19,text,true,,453,294,20,20,http://localhost:18083/routes/api/coordinates,56,0,0
+1795368171430,56,Create location,201,,1. CRUD + import (USERS parallel users) 1-3,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,56,0,0
+1795368171428,61,Create location,201,,1. CRUD + import (USERS parallel users) 1-20,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,60,0,0
+1795368171434,57,Create location,201,,1. CRUD + import (USERS parallel users) 1-9,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,57,0,0
+1795368171438,61,Create route,201,,1. CRUD + import (USERS parallel users) 1-8,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,61,0,0
+1795368171442,66,Create route,201,,1. CRUD + import (USERS parallel users) 1-13,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,66,0,0
+1795368171445,70,Create route,201,,1. CRUD + import (USERS parallel users) 1-18,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,70,0,0
+1795368171449,74,Create route,201,,1. CRUD + import (USERS parallel users) 1-16,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,74,0,0
+1795368171456,74,Create route,201,,1. CRUD + import (USERS parallel users) 1-14,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,74,0,0
+1795368171417,115,Create location,201,,1. CRUD + import (USERS parallel users) 1-11,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,115,0,0
+1795368171459,80,Create route,201,,1. CRUD + import (USERS parallel users) 1-12,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,80,0,0
+1795368171461,81,Create route,201,,1. CRUD + import (USERS parallel users) 1-6,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,81,0,0
+1795368171465,84,Create route,201,,1. CRUD + import (USERS parallel users) 1-1,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,84,0,0
+1795368171469,82,Create route,201,,1. CRUD + import (USERS parallel users) 1-5,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,82,0,0
+1795368171453,107,Create route,201,,1. CRUD + import (USERS parallel users) 1-10,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,107,0,0
+1795368171474,89,Create location,201,,1. CRUD + import (USERS parallel users) 1-7,text,true,,482,323,20,20,http://localhost:18083/routes/api/locations,89,0,0
+1795368171481,89,Create route,201,,1. CRUD + import (USERS parallel users) 1-2,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,89,0,0
+1795368171471,101,Create route,201,,1. CRUD + import (USERS parallel users) 1-15,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,101,0,0
+1795368171476,99,Create route,201,,1. CRUD + import (USERS parallel users) 1-4,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,99,0,0
+1795368171485,92,Create location,201,,1. CRUD + import (USERS parallel users) 1-19,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,92,0,0
+1795368171487,93,Create route,201,,1. CRUD + import (USERS parallel users) 1-3,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,92,0,0
+1795368171489,93,Create route,201,,1. CRUD + import (USERS parallel users) 1-20,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,93,0,0
+1795368171491,94,Create route,201,,1. CRUD + import (USERS parallel users) 1-9,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,94,0,0
+1795368171509,79,Update route,200,,1. CRUD + import (USERS parallel users) 1-13,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/190,79,0,0
+1795368171501,90,Update route,200,,1. CRUD + import (USERS parallel users) 1-8,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/189,90,0,0
+1795368171516,78,Update route,200,,1. CRUD + import (USERS parallel users) 1-18,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/191,78,0,0
+1795368171524,73,Update route,200,,1. CRUD + import (USERS parallel users) 1-16,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/192,73,0,0
+1795368171531,69,Update route,200,,1. CRUD + import (USERS parallel users) 1-14,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/193,69,0,0
+1795368171540,63,Update route,200,,1. CRUD + import (USERS parallel users) 1-12,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/194,63,0,0
+1795368171571,36,Update route,200,,1. CRUD + import (USERS parallel users) 1-2,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/199,35,0,0
+1795368171532,77,Create route,201,,1. CRUD + import (USERS parallel users) 1-11,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,77,0,0
+1795368171552,60,Update route,200,,1. CRUD + import (USERS parallel users) 1-5,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/197,60,0,0
+1795368171575,40,Update route,200,,1. CRUD + import (USERS parallel users) 1-4,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/201,40,0,0
+1795368171479,138,Create location,201,,1. CRUD + import (USERS parallel users) 1-17,text,true,,483,324,20,20,http://localhost:18083/routes/api/locations,138,0,0
+1795368171573,49,Update route,200,,1. CRUD + import (USERS parallel users) 1-15,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/200,49,0,0
+1795368171610,17,Update route,200,,1. CRUD + import (USERS parallel users) 1-11,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/205,17,0,0
+1795368171577,52,Create route,201,,1. CRUD + import (USERS parallel users) 1-19,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,52,0,0
+1795368171583,50,Update route,200,,1. CRUD + import (USERS parallel users) 1-20,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/203,50,0,0
+1795368171581,59,Update route,200,,1. CRUD + import (USERS parallel users) 1-3,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/202,59,0,0
+1795368171561,82,Update route,200,,1. CRUD + import (USERS parallel users) 1-10,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/198,82,0,0
+1795368171630,19,Update route,200,,1. CRUD + import (USERS parallel users) 1-19,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/206,18,0,0
+1795368171543,110,Update route,200,,1. CRUD + import (USERS parallel users) 1-6,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/195,110,0,0
+1795368171618,40,Create route,201,,1. CRUD + import (USERS parallel users) 1-17,text,true,,697,363,20,20,http://localhost:18083/routes/api/routes,39,0,0
+1795368171586,75,Update route,200,,1. CRUD + import (USERS parallel users) 1-9,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/204,75,0,0
+1795368171550,116,Update route,200,,1. CRUD + import (USERS parallel users) 1-1,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/196,116,0,0
+1795368171658,14,Update route,200,,1. CRUD + import (USERS parallel users) 1-17,text,true,,644,380,20,20,http://localhost:18083/routes/api/routes/207,14,0,0
+1795368171563,114,Create route,201,,1. CRUD + import (USERS parallel users) 1-7,text,true,,694,362,20,20,http://localhost:18083/routes/api/routes,114,0,0
+1795368171678,6,Update route,200,,1. CRUD + import (USERS parallel users) 1-7,text,true,,641,379,20,20,http://localhost:18083/routes/api/routes/208,6,0,0
+1795368171641,8,List routes,200,,1. CRUD + import (USERS parallel users) 1-3,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,8,0,0
+1795368171607,30,List routes,200,,1. CRUD + import (USERS parallel users) 1-2,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,30,0,0
+1795368171592,31,List routes,200,,1. CRUD + import (USERS parallel users) 1-8,text,true,,2110,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,31,0,0
+1795368171598,29,List routes,200,,1. CRUD + import (USERS parallel users) 1-16,text,true,,2110,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,29,0,0
+1795368171662,7,List routes,200,,1. CRUD + import (USERS parallel users) 1-9,text,true,,2826,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,7,0,0
+1795368171673,8,List routes,200,,1. CRUD + import (USERS parallel users) 1-17,text,true,,3184,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,8,0,0
+1795368171650,7,List routes,200,,1. CRUD + import (USERS parallel users) 1-19,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,7,0,0
+1795368171634,11,List routes,200,,1. CRUD + import (USERS parallel users) 1-20,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,11,0,0
+1795368171613,30,List routes,200,,1. CRUD + import (USERS parallel users) 1-5,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,30,0,0
+1795368171595,32,List routes,200,,1. CRUD + import (USERS parallel users) 1-18,text,true,,2110,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,32,0,0
+1795368171653,8,List routes,200,,1. CRUD + import (USERS parallel users) 1-6,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,8,0,0
+1795368171601,35,List routes,200,,1. CRUD + import (USERS parallel users) 1-14,text,true,,2110,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,35,0,0
+1795368171666,10,List routes,200,,1. CRUD + import (USERS parallel users) 1-1,text,true,,2826,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,10,0,0
+1795368171684,7,List routes,200,,1. CRUD + import (USERS parallel users) 1-7,text,true,,3184,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,7,0,0
+1795368171623,19,List routes,200,,1. CRUD + import (USERS parallel users) 1-15,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,19,0,0
+1795368171604,29,List routes,200,,1. CRUD + import (USERS parallel users) 1-12,text,true,,2110,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,29,0,0
+1795368171589,7,List routes,200,,1. CRUD + import (USERS parallel users) 1-13,text,true,,1752,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,7,0,0
+1795368171616,29,List routes,200,,1. CRUD + import (USERS parallel users) 1-4,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,29,0,0
+1795368171628,8,List routes,200,,1. CRUD + import (USERS parallel users) 1-11,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,8,0,0
+1795368171644,6,List routes,200,,1. CRUD + import (USERS parallel users) 1-10,text,true,,2468,260,20,20,http://localhost:18083/routes/api/routes?page=1000000&size=10&sort=id&direction=desc,6,0,0
+1795368171850,42,Import file,201,,1. CRUD + import (USERS parallel users) 1-9,text,true,,475,1272,20,20,http://localhost:18083/routes/api/imports,42,0,0
+1795368171850,60,Import file,201,,1. CRUD + import (USERS parallel users) 1-10,text,true,,476,1276,20,20,http://localhost:18083/routes/api/imports,59,0,0
+1795368171851,76,Import file,201,,1. CRUD + import (USERS parallel users) 1-3,text,true,,475,1274,20,20,http://localhost:18083/routes/api/imports,75,0,0
+1795368171852,91,Import file,201,,1. CRUD + import (USERS parallel users) 1-11,text,true,,477,1264,20,20,http://localhost:18083/routes/api/imports,90,0,0
+1795368171851,110,Import file,201,,1. CRUD + import (USERS parallel users) 1-4,text,true,,476,1268,20,20,http://localhost:18083/routes/api/imports,109,0,0
+1795368171852,126,Import file,201,,1. CRUD + import (USERS parallel users) 1-16,text,true,,477,1273,20,20,http://localhost:18083/routes/api/imports,126,0,0
+1795368171853,142,Import file,201,,1. CRUD + import (USERS parallel users) 1-7,text,true,,476,1284,20,20,http://localhost:18083/routes/api/imports,141,0,0
+1795368171850,164,Import file,201,,1. CRUD + import (USERS parallel users) 1-15,text,true,,477,1270,20,20,http://localhost:18083/routes/api/imports,163,0,0
+1795368171852,178,Import file,201,,1. CRUD + import (USERS parallel users) 1-12,text,true,,477,1282,20,20,http://localhost:18083/routes/api/imports,177,0,0
+1795368171852,194,Import file,201,,1. CRUD + import (USERS parallel users) 1-14,text,true,,477,1275,20,20,http://localhost:18083/routes/api/imports,193,0,0
+1795368171852,209,Import file,201,,1. CRUD + import (USERS parallel users) 1-5,text,true,,476,1260,20,20,http://localhost:18083/routes/api/imports,208,0,0
+1795368171852,226,Import file,201,,1. CRUD + import (USERS parallel users) 1-2,text,true,,476,1282,20,20,http://localhost:18083/routes/api/imports,225,0,0
+1795368171850,245,Import file,201,,1. CRUD + import (USERS parallel users) 1-18,text,true,,477,1270,20,20,http://localhost:18083/routes/api/imports,245,0,0
+1795368171852,259,Import file,201,,1. CRUD + import (USERS parallel users) 1-19,text,true,,477,1276,20,20,http://localhost:18083/routes/api/imports,259,0,0
+1795368171850,276,Import file,201,,1. CRUD + import (USERS parallel users) 1-6,text,true,,476,1267,20,20,http://localhost:18083/routes/api/imports,276,0,0
+1795368171851,289,Import file,201,,1. CRUD + import (USERS parallel users) 1-8,text,true,,476,1257,20,20,http://localhost:18083/routes/api/imports,289,0,0
+1795368171850,306,Import file,201,,1. CRUD + import (USERS parallel users) 1-13,text,true,,477,1268,20,20,http://localhost:18083/routes/api/imports,305,0,0
+1795368171850,322,Import file,201,,1. CRUD + import (USERS parallel users) 1-1,text,true,,476,1269,20,20,http://localhost:18083/routes/api/imports,321,0,0
+1795368171850,339,Import file,201,,1. CRUD + import (USERS parallel users) 1-17,text,true,,477,1281,20,20,http://localhost:18083/routes/api/imports,338,0,0
+1795368171851,353,Import file,201,,1. CRUD + import (USERS parallel users) 1-20,text,true,,477,1272,20,20,http://localhost:18083/routes/api/imports,353,0,0
+1795368172064,193,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-5,text,true,,481,919,20,20,http://localhost:18083/routes/api/imports,193,0,0
+1795368172048,209,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-14,text,true,,482,926,20,20,http://localhost:18083/routes/api/imports,208,0,0
+1795368171994,258,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-9,text,true,,481,932,20,20,http://localhost:18083/routes/api/imports,258,0,0
+1795368171996,259,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-3,text,true,,481,916,20,20,http://localhost:18083/routes/api/imports,258,0,0
+1795368172098,163,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-18,text,true,,482,929,20,20,http://localhost:18083/routes/api/imports,163,0,0
+1795368172032,225,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-12,text,true,,482,939,20,20,http://localhost:18083/routes/api/imports,224,0,0
+1795368171997,257,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-16,text,true,,482,942,20,20,http://localhost:18083/routes/api/imports,256,0,0
+1795368171993,255,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-11,text,true,,482,924,20,20,http://localhost:18083/routes/api/imports,254,0,0
+1795368172115,153,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-19,text,true,,482,936,20,20,http://localhost:18083/routes/api/imports,151,0,0
+1795368172000,253,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-7,text,true,,481,937,20,20,http://localhost:18083/routes/api/imports,252,0,0
+1795368172016,241,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-15,text,true,,482,936,20,20,http://localhost:18083/routes/api/imports,241,0,0
+1795368171999,256,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-4,text,true,,481,940,20,20,http://localhost:18083/routes/api/imports,256,0,0
+1795368172081,176,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-2,text,true,,481,928,20,20,http://localhost:18083/routes/api/imports,174,0,0
+1795368171995,257,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-10,text,true,,481,928,20,20,http://localhost:18083/routes/api/imports,256,0,0
+1795368172129,144,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-6,text,true,,481,937,20,20,http://localhost:18083/routes/api/imports,143,0,0
+1795368172143,136,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-8,text,true,,481,916,20,20,http://localhost:18083/routes/api/imports,134,0,0
+1795368172159,123,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-13,text,true,,482,914,20,20,http://localhost:18083/routes/api/imports,123,0,0
+1795368172175,113,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-1,text,true,,481,916,20,20,http://localhost:18083/routes/api/imports,112,0,0
+1795368172193,100,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-17,text,true,,482,932,20,20,http://localhost:18083/routes/api/imports,99,0,0
+1795368172207,90,Reject duplicate in second record,409,,1. CRUD + import (USERS parallel users) 1-20,text,true,,482,941,20,20,http://localhost:18083/routes/api/imports,90,0,0
+1795368172269,8,Import history,200,,1. CRUD + import (USERS parallel users) 1-11,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,8,0,0
+1795368172270,8,Import history,200,,1. CRUD + import (USERS parallel users) 1-7,text,true,,725,217,20,20,http://localhost:18083/routes/api/imports,8,0,0
+1795368172268,10,Import history,200,,1. CRUD + import (USERS parallel users) 1-9,text,true,,724,217,20,20,http://localhost:18083/routes/api/imports,10,0,0
+1795368172268,6,Import history,200,,1. CRUD + import (USERS parallel users) 1-14,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,6,0,0
+1795368172289,4,Import history,200,,1. CRUD + import (USERS parallel users) 1-1,text,true,,725,217,20,20,http://localhost:18083/routes/api/imports,3,0,0
+1795368172268,12,Import history,200,,1. CRUD + import (USERS parallel users) 1-3,text,true,,724,217,20,20,http://localhost:18083/routes/api/imports,12,0,0
+1795368172283,4,Import history,200,,1. CRUD + import (USERS parallel users) 1-13,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,3,0,0
+1795368172280,2,Import history,200,,1. CRUD + import (USERS parallel users) 1-8,text,true,,725,217,20,20,http://localhost:18083/routes/api/imports,2,0,0
+1795368172271,13,Import history,200,,1. CRUD + import (USERS parallel users) 1-2,text,true,,725,217,20,20,http://localhost:18083/routes/api/imports,13,0,0
+1795368172272,11,Import history,200,,1. CRUD + import (USERS parallel users) 1-10,text,true,,726,217,20,20,http://localhost:18083/routes/api/imports,11,0,0
+1795368172274,8,Import history,200,,1. CRUD + import (USERS parallel users) 1-6,text,true,,725,217,20,20,http://localhost:18083/routes/api/imports,8,0,0
+1795368172268,5,Import history,200,,1. CRUD + import (USERS parallel users) 1-16,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,5,0,0
+1795368172269,6,Import history,200,,1. CRUD + import (USERS parallel users) 1-18,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,6,0,0
+1795368172268,8,Import history,200,,1. CRUD + import (USERS parallel users) 1-5,text,true,,725,217,20,20,http://localhost:18083/routes/api/imports,8,0,0
+1795368172298,3,Import history,200,,1. CRUD + import (USERS parallel users) 1-20,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,3,0,0
+1795368172271,3,Import history,200,,1. CRUD + import (USERS parallel users) 1-4,text,true,,725,217,20,20,http://localhost:18083/routes/api/imports,3,0,0
+1795368172268,9,Import history,200,,1. CRUD + import (USERS parallel users) 1-12,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,9,0,0
+1795368172294,3,Import history,200,,1. CRUD + import (USERS parallel users) 1-17,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,3,0,0
+1795368172270,11,Import history,200,,1. CRUD + import (USERS parallel users) 1-15,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,11,0,0
+1795368172270,13,Import history,200,,1. CRUD + import (USERS parallel users) 1-19,text,true,,728,217,20,20,http://localhost:18083/routes/api/imports,13,0,0
+1795368172324,7,Delete route,204,,1. CRUD + import (USERS parallel users) 1-18,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/191?version=1,0,0,0
+1795368172324,9,Delete route,204,,1. CRUD + import (USERS parallel users) 1-2,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/199?version=1,0,0,0
+1795368172324,10,Delete route,204,,1. CRUD + import (USERS parallel users) 1-5,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/197?version=1,0,0,0
+1795368172324,12,Delete route,204,,1. CRUD + import (USERS parallel users) 1-8,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/189?version=1,0,0,0
+1795368172324,13,Delete route,204,,1. CRUD + import (USERS parallel users) 1-6,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/195?version=1,0,0,0
+1795368172324,14,Delete route,204,,1. CRUD + import (USERS parallel users) 1-16,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/192?version=1,0,0,0
+1795368172324,16,Delete route,204,,1. CRUD + import (USERS parallel users) 1-11,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/205?version=1,0,0,0
+1795368172326,15,Delete route,204,,1. CRUD + import (USERS parallel users) 1-17,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/207?version=1,0,0,0
+1795368172325,17,Delete route,204,,1. CRUD + import (USERS parallel users) 1-14,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/193?version=1,0,0,0
+1795368172325,20,Delete route,204,,1. CRUD + import (USERS parallel users) 1-7,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/208?version=1,0,0,0
+1795368172327,20,Delete route,204,,1. CRUD + import (USERS parallel users) 1-15,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/200?version=1,0,0,0
+1795368172325,24,Delete route,204,,1. CRUD + import (USERS parallel users) 1-12,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/194?version=1,0,0,0
+1795368172325,26,Delete route,204,,1. CRUD + import (USERS parallel users) 1-1,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/196?version=1,0,0,0
+1795368172324,30,Delete route,204,,1. CRUD + import (USERS parallel users) 1-10,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/198?version=1,0,0,0
+1795368172325,33,Delete route,204,,1. CRUD + import (USERS parallel users) 1-4,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/201?version=1,0,0,0
+1795368172325,35,Delete route,204,,1. CRUD + import (USERS parallel users) 1-20,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/203?version=1,0,0,0
+1795368172325,37,Delete route,204,,1. CRUD + import (USERS parallel users) 1-9,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/204?version=1,0,0,0
+1795368172325,40,Delete route,204,,1. CRUD + import (USERS parallel users) 1-13,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/190?version=1,0,0,0
+1795368172325,42,Delete route,204,,1. CRUD + import (USERS parallel users) 1-3,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/202?version=1,0,0,0
+1795368172358,4,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-4,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-3&size=10,4,0,0
+1795368172340,19,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-11,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-10&size=10,19,0,0
+1795368172354,7,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-10,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-9&size=10,7,0,0
+1795368172343,15,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-14,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-13&size=10,13,0,0
+1795368172339,18,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-5,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-4&size=10,18,0,0
+1795368172365,4,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-13,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-12&size=10,4,0,0
+1795368172345,11,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-7,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-6&size=10,11,0,0
+1795368172351,6,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-1,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-0&size=10,6,0,0
+1795368172349,5,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-12,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-11&size=10,5,0,0
+1795368172342,12,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-17,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-16&size=10,12,0,0
+1795368172339,14,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-18,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-17&size=10,14,0,0
+1795368172339,5,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-2,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-1&size=10,5,0,0
+1795368172348,4,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-15,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-14&size=10,4,0,0
+1795368172367,5,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-3,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-2&size=10,5,0,0
+1795368172339,13,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-16,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-15&size=10,13,0,0
+1795368172339,10,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-8,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-7&size=10,10,0,0
+1795368172339,10,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-6,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-5&size=10,10,0,0
+1795368172361,5,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-20,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-19&size=10,5,0,0
+1795368172362,4,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-9,text,true,,384,257,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-8&size=10,4,0,0
+1795368172331,43,Delete route,204,,1. CRUD + import (USERS parallel users) 1-19,,true,,272,316,20,20,http://localhost:18083/routes/api/routes/206?version=1,0,0,0
+1795368172374,12,Check rollback: routes,200,,1. CRUD + import (USERS parallel users) 1-19,text,true,,384,258,20,20,http://localhost:18083/routes/api/routes?name=rollback-ac68bb83997447c4-18&size=10,12,0,0
+1795368172374,15,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-8,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,14,0,0
+1795368172371,15,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-1,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,14,0,0
+1795368172371,18,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-17,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,18,0,0
+1795368172372,20,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-2,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,19,0,0
+1795368172374,16,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-20,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,15,0,0
+1795368172368,5,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-4,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,5,0,0
+1795368172374,17,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-9,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,16,0,0
+1795368172371,8,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-18,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,8,0,0
+1795368172368,12,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-10,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,10,0,0
+1795368172371,14,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-12,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,12,0,0
+1795368172373,12,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-16,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,11,0,0
+1795368172368,12,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-5,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,12,0,0
+1795368172373,17,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-15,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,16,0,0
+1795368172367,6,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-11,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,5,0,0
+1795368172374,16,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-6,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,16,0,0
+1795368172390,5,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-19,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,4,0,0
+1795368172373,14,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-3,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,14,0,0
+1795368172368,23,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-14,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,23,0,0
+1795368172370,15,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-13,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,15,0,0
+1795368172371,15,Check rollback: locations,200,,1. CRUD + import (USERS parallel users) 1-7,text,true,,31397,219,20,20,http://localhost:18083/routes/api/locations,15,0,0
+1795368172422,33,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-8,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,33,0,0
+1795368172437,16,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-5,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,16,0,0
+1795368172434,18,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-20,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,18,0,0
+1795368172435,8,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-4,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,8,0,0
+1795368172448,5,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-14,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,5,0,0
+1795368172435,10,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-9,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,10,0,0
+1795368172434,5,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-1,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,5,0,0
+1795368172434,9,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-17,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,9,0,0
+1795368172435,9,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-16,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,9,0,0
+1795368172438,5,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-15,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,5,0,0
+1795368172455,5,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-10,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,5,0,0
+1795368172435,8,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-12,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,8,0,0
+1795368172435,9,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-18,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,9,0,0
+1795368172434,17,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-2,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,17,0,0
+1795368172447,3,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-3,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,3,0,0
+1795368172440,5,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-6,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,5,0,0
+1795368172449,4,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-19,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,4,0,0
+1795368172438,8,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-11,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,8,0,0
+1795368172454,3,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-7,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,3,0,0
+1795368172448,7,Check rollback: coordinates,200,,1. CRUD + import (USERS parallel users) 1-13,text,true,,12439,221,20,20,http://localhost:18083/routes/api/coordinates,7,0,0
+1795368172490,67,Register prep,201,,2. Prepare shared objects 2-1,text,true,,475,285,1,1,http://localhost:18083/routes/api/auth/register,67,0,1
+1795368172559,3,Create shared coordinates,201,,2. Prepare shared objects 2-1,text,true,,458,299,1,1,http://localhost:18083/routes/api/coordinates,3,0,0
+1795368172563,5,Create shared location,201,,2. Prepare shared objects 2-1,text,true,,487,328,1,1,http://localhost:18083/routes/api/locations,5,0,0
+1795368172569,4,Create route U (update race),201,,2. Prepare shared objects 2-1,text,true,,709,366,1,1,http://localhost:18083/routes/api/routes,4,0,0
+1795368172574,5,Create route D (delete race),201,,2. Prepare shared objects 2-1,text,true,,709,366,1,1,http://localhost:18083/routes/api/routes,5,0,0
+1795368172579,5,Create route M (mixed race),201,,2. Prepare shared objects 2-1,text,true,,708,365,1,1,http://localhost:18083/routes/api/routes,5,0,0
+1795368172584,22,Publish ids to other thread groups,200,OK,2. Prepare shared objects 2-1,text,true,,43,0,1,1,null,0,0,0
+1795368172611,84,Register race users,201,,3. Races: unique values and same-object update/delete 3-5,text,true,,474,284,8,8,http://localhost:18083/routes/api/auth/register,84,0,1
+1795368172608,88,Register race users,201,,3. Races: unique values and same-object update/delete 3-2,text,true,,474,284,8,8,http://localhost:18083/routes/api/auth/register,88,0,1
+1795368172610,88,Register race users,201,,3. Races: unique values and same-object update/delete 3-4,text,true,,474,284,8,8,http://localhost:18083/routes/api/auth/register,88,0,0
+1795368172614,87,Register race users,201,,3. Races: unique values and same-object update/delete 3-3,text,true,,474,284,8,8,http://localhost:18083/routes/api/auth/register,87,0,3
+1795368172608,95,Register race users,201,,3. Races: unique values and same-object update/delete 3-1,text,true,,474,284,8,8,http://localhost:18083/routes/api/auth/register,95,0,2
+1795368172616,88,Register race users,201,,3. Races: unique values and same-object update/delete 3-7,text,true,,474,284,8,8,http://localhost:18083/routes/api/auth/register,88,0,1
+1795368172617,94,Register race users,201,,3. Races: unique values and same-object update/delete 3-8,text,true,,474,284,8,8,http://localhost:18083/routes/api/auth/register,94,0,0
+1795368172615,97,Register race users,201,,3. Races: unique values and same-object update/delete 3-6,text,true,,474,284,8,8,http://localhost:18083/routes/api/auth/register,97,0,3
+1795368172713,6,RACE same coordinates,409,,3. Races: unique values and same-object update/delete 3-3,text,true,,441,300,8,8,http://localhost:18083/routes/api/coordinates,6,0,0
+1795368172714,6,RACE same coordinates,409,,3. Races: unique values and same-object update/delete 3-8,text,true,,441,300,8,8,http://localhost:18083/routes/api/coordinates,6,0,0
+1795368172713,5,RACE same coordinates,409,,3. Races: unique values and same-object update/delete 3-2,text,true,,441,300,8,8,http://localhost:18083/routes/api/coordinates,5,0,0
+1795368172713,4,RACE same coordinates,409,,3. Races: unique values and same-object update/delete 3-7,text,true,,441,300,8,8,http://localhost:18083/routes/api/coordinates,4,0,0
+1795368172713,7,RACE same coordinates,409,,3. Races: unique values and same-object update/delete 3-4,text,true,,441,300,8,8,http://localhost:18083/routes/api/coordinates,7,0,0
+1795368172713,6,RACE same coordinates,409,,3. Races: unique values and same-object update/delete 3-6,text,true,,441,300,8,8,http://localhost:18083/routes/api/coordinates,6,0,0
+1795368172713,5,RACE same coordinates,409,,3. Races: unique values and same-object update/delete 3-5,text,true,,441,300,8,8,http://localhost:18083/routes/api/coordinates,5,0,0
+1795368172713,4,RACE same coordinates,201,,3. Races: unique values and same-object update/delete 3-1,text,true,,459,300,8,8,http://localhost:18083/routes/api/coordinates,4,0,0
+1795368172740,15,RACE same location name,409,,3. Races: unique values and same-object update/delete 3-3,text,true,,463,326,8,8,http://localhost:18083/routes/api/locations,15,0,0
+1795368172741,15,RACE same location name,409,,3. Races: unique values and same-object update/delete 3-1,text,true,,463,326,8,8,http://localhost:18083/routes/api/locations,15,0,0
+1795368172741,6,RACE same location name,409,,3. Races: unique values and same-object update/delete 3-6,text,true,,463,326,8,8,http://localhost:18083/routes/api/locations,6,0,0
+1795368172740,12,RACE same location name,409,,3. Races: unique values and same-object update/delete 3-5,text,true,,463,326,8,8,http://localhost:18083/routes/api/locations,12,0,0
+1795368172740,14,RACE same location name,409,,3. Races: unique values and same-object update/delete 3-2,text,true,,463,326,8,8,http://localhost:18083/routes/api/locations,14,0,0
+1795368172740,10,RACE same location name,409,,3. Races: unique values and same-object update/delete 3-8,text,true,,463,326,8,8,http://localhost:18083/routes/api/locations,10,0,0
+1795368172740,6,RACE same location name,201,,3. Races: unique values and same-object update/delete 3-7,text,true,,485,326,8,8,http://localhost:18083/routes/api/locations,6,0,0
+1795368172740,11,RACE same location name,409,,3. Races: unique values and same-object update/delete 3-4,text,true,,463,326,8,8,http://localhost:18083/routes/api/locations,11,0,0
+1795368172758,13,RACE same route name,409,,3. Races: unique values and same-object update/delete 3-3,text,true,,465,364,8,8,http://localhost:18083/routes/api/routes,13,0,0
+1795368172758,12,RACE same route name,409,,3. Races: unique values and same-object update/delete 3-6,text,true,,465,364,8,8,http://localhost:18083/routes/api/routes,12,0,0
+1795368172758,13,RACE same route name,409,,3. Races: unique values and same-object update/delete 3-2,text,true,,465,364,8,8,http://localhost:18083/routes/api/routes,13,0,0
+1795368172758,14,RACE same route name,409,,3. Races: unique values and same-object update/delete 3-5,text,true,,465,364,8,8,http://localhost:18083/routes/api/routes,14,0,0
+1795368172758,15,RACE same route name,409,,3. Races: unique values and same-object update/delete 3-7,text,true,,465,364,8,8,http://localhost:18083/routes/api/routes,15,0,0
+1795368172758,12,RACE same route name,409,,3. Races: unique values and same-object update/delete 3-4,text,true,,465,364,8,8,http://localhost:18083/routes/api/routes,12,0,0
+1795368172758,14,RACE same route name,409,,3. Races: unique values and same-object update/delete 3-8,text,true,,465,364,8,8,http://localhost:18083/routes/api/routes,14,0,0
+1795368172758,12,RACE same route name,201,,3. Races: unique values and same-object update/delete 3-1,text,true,,709,364,8,8,http://localhost:18083/routes/api/routes,12,0,0
+1795368172797,13,RACE same import file,409,,3. Races: unique values and same-object update/delete 3-1,text,true,,482,767,8,8,http://localhost:18083/routes/api/imports,12,0,0
+1795368172797,14,RACE same import file,409,,3. Races: unique values and same-object update/delete 3-3,text,true,,482,739,8,8,http://localhost:18083/routes/api/imports,13,0,0
+1795368172797,11,RACE same import file,201,,3. Races: unique values and same-object update/delete 3-2,text,true,,475,760,8,8,http://localhost:18083/routes/api/imports,11,0,0
+1795368172797,13,RACE same import file,409,,3. Races: unique values and same-object update/delete 3-8,text,true,,482,742,8,8,http://localhost:18083/routes/api/imports,13,0,0
+1795368172797,15,RACE same import file,409,,3. Races: unique values and same-object update/delete 3-7,text,true,,482,746,8,8,http://localhost:18083/routes/api/imports,14,0,0
+1795368172797,14,RACE same import file,409,,3. Races: unique values and same-object update/delete 3-6,text,true,,482,760,8,8,http://localhost:18083/routes/api/imports,14,0,0
+1795368172797,16,RACE same import file,409,,3. Races: unique values and same-object update/delete 3-4,text,true,,482,758,8,8,http://localhost:18083/routes/api/imports,16,0,0
+1795368172797,15,RACE same import file,409,,3. Races: unique values and same-object update/delete 3-5,text,true,,482,743,8,8,http://localhost:18083/routes/api/imports,15,0,0
+1795368172820,8,RACE update same route,409,,3. Races: unique values and same-object update/delete 3-5,text,true,,476,380,8,8,http://localhost:18083/routes/api/routes/289,8,0,0
+1795368172820,6,RACE update same route,409,,3. Races: unique values and same-object update/delete 3-6,text,true,,476,380,8,8,http://localhost:18083/routes/api/routes/289,6,0,0
+1795368172820,6,RACE update same route,409,,3. Races: unique values and same-object update/delete 3-8,text,true,,476,380,8,8,http://localhost:18083/routes/api/routes/289,6,0,0
+1795368172820,8,RACE update same route,409,,3. Races: unique values and same-object update/delete 3-2,text,true,,476,380,8,8,http://localhost:18083/routes/api/routes/289,8,0,0
+1795368172820,9,RACE update same route,409,,3. Races: unique values and same-object update/delete 3-3,text,true,,476,380,8,8,http://localhost:18083/routes/api/routes/289,9,0,0
+1795368172820,7,RACE update same route,409,,3. Races: unique values and same-object update/delete 3-1,text,true,,476,380,8,8,http://localhost:18083/routes/api/routes/289,7,0,0
+1795368172820,5,RACE update same route,200,,3. Races: unique values and same-object update/delete 3-4,text,true,,653,380,8,8,http://localhost:18083/routes/api/routes/289,5,0,0
+1795368172820,7,RACE update same route,409,,3. Races: unique values and same-object update/delete 3-7,text,true,,476,380,8,8,http://localhost:18083/routes/api/routes/289,7,0,0
+1795368172836,8,RACE delete same route,404,,3. Races: unique values and same-object update/delete 3-6,text,true,,406,316,8,8,http://localhost:18083/routes/api/routes/290?version=0,8,0,0
+1795368172836,5,RACE delete same route,404,,3. Races: unique values and same-object update/delete 3-2,text,true,,406,316,8,8,http://localhost:18083/routes/api/routes/290?version=0,5,0,0
+1795368172837,4,RACE delete same route,204,,3. Races: unique values and same-object update/delete 3-4,,true,,272,316,8,8,http://localhost:18083/routes/api/routes/290?version=0,0,0,0
+1795368172837,6,RACE delete same route,404,,3. Races: unique values and same-object update/delete 3-3,text,true,,406,316,8,8,http://localhost:18083/routes/api/routes/290?version=0,6,0,0
+1795368172836,7,RACE delete same route,404,,3. Races: unique values and same-object update/delete 3-7,text,true,,406,316,8,8,http://localhost:18083/routes/api/routes/290?version=0,7,0,0
+1795368172836,6,RACE delete same route,404,,3. Races: unique values and same-object update/delete 3-5,text,true,,406,316,8,8,http://localhost:18083/routes/api/routes/290?version=0,6,0,0
+1795368172836,7,RACE delete same route,404,,3. Races: unique values and same-object update/delete 3-8,text,true,,406,316,8,8,http://localhost:18083/routes/api/routes/290?version=0,7,0,0
+1795368172837,5,RACE delete same route,404,,3. Races: unique values and same-object update/delete 3-1,text,true,,406,316,8,8,http://localhost:18083/routes/api/routes/290?version=0,5,0,0
+1795368172853,48,Register mixed users,201,,4. Mixed update and delete 4-2,text,true,,474,284,2,2,http://localhost:18083/routes/api/auth/register,48,0,1
+1795368172853,52,Register mixed users,201,,4. Mixed update and delete 4-1,text,true,,474,284,2,2,http://localhost:18083/routes/api/auth/register,52,0,1
+1795368172912,5,RACE update versus delete,404,,4. Mixed update and delete 4-1,text,true,,406,390,2,2,http://localhost:18083/routes/api/routes/291?version=0,5,0,0
+1795368172912,4,RACE update versus delete,204,,4. Mixed update and delete 4-2,,true,,272,393,2,2,http://localhost:18083/routes/api/routes/291?version=0,0,0,0
+1795368172947,64,Register ver,201,,5. Verify outcome 5-1,text,true,,474,284,1,1,http://localhost:18083/routes/api/auth/register,64,0,1
+1795368173012,2,Check: exactly one winner in every race,200,,5. Verify outcome 5-1,text,true,,361,215,1,1,http://localhost:18083/routes/api/state,2,0,0
+1795368173026,31,Check persisted uniqueness: route and import,200,,5. Verify outcome 5-1,text,true,,24664,256,1,1,http://localhost:18083/routes/api/operations/name-contains?part=ac68bb83997447c4,31,0,0
+1795368173073,4,Check persisted uniqueness: location,200,,5. Verify outcome 5-1,text,true,,31658,219,1,1,http://localhost:18083/routes/api/locations,4,0,0
+1795368173090,3,Check persisted uniqueness: coordinates,200,,5. Verify outcome 5-1,text,true,,12602,221,1,1,http://localhost:18083/routes/api/coordinates,3,0,0
+1795368173108,3,Check: route U changed exactly once,200,,5. Verify outcome 5-1,text,true,,653,220,1,1,http://localhost:18083/routes/api/routes/289,3,0,0
+1795368173126,3,Check: route D is deleted,404,,5. Verify outcome 5-1,text,true,,406,220,1,1,http://localhost:18083/routes/api/routes/290,3,0,0
+1795368173129,2,Check: mixed race persisted exactly one outcome,404,,5. Verify outcome 5-1,text,true,,406,220,1,1,http://localhost:18083/routes/api/routes/291,2,0,0

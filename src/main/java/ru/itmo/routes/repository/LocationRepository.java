@@ -9,6 +9,6 @@ import java.util.List;
 public interface LocationRepository extends JpaRepository<Location, Long> {
     List<Location> findAllByOrderByNameAscIdAsc();
 
-    @Query("select l from Location l where lower(trim(l.name)) = lower(trim(:name)) and l.id <> :excluded order by l.id")
-    List<Location> findByNormalizedName(@Param("name") String name, @Param("excluded") long excluded);
+    @Query("select l from Location l where l.id <> :excluded order by l.id")
+    List<Location> findForUniqueness(@Param("excluded") long excluded);
 }

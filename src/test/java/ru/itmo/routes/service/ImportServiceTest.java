@@ -62,6 +62,22 @@ class ImportServiceTest {
     }
 
     @Test
+    void nullDocumentAndLossyJsonCoercionsAreRejectedWithoutWritingData() {
+        String record = """
+                [{"name":"x","coordinates":{"x":1,"y":2},
+                  "to":{"name":"B","x":1,"y":2,"z":1},"distance":5,"rating":1}]
+                """;
+        for (String invalid : new String[]{"null", "", record.replace("\"z\":1", "\"z\":1.5"),
+                record.replace("\"rating\":1", "\"rating\":\"1\""),
+                record.replace("\"rating\":1", "\"rating\":1,\"rating\":2"),
+                record.replace("\"name\":\"x\"", "\"name\":123")}) {
+            assertThrows(InvalidInputException.class, () -> service.run("alice", bytes(invalid)), invalid);
+        }
+        verify(history, times(6)).save(any());
+        verifyNoInteractions(changes, routes);
+    }
+
+    @Test
     void domainConstraintsAreCheckedForEveryRecordIncludingNestedObjects() {
         String file = "[{\"name\":\" \",\"coordinates\":{\"x\":1,\"y\":2},\"to\":{\"x\":1,\"y\":1,\"z\":1,\"name\":\"B\"},"
                 + "\"distance\":0.5,\"rating\":-1},{\"name\":\"ok\",\"coordinates\":{\"x\":1},\"to\":{\"x\":1,\"y\":1,\"z\":1,\"name\":\" \"},"

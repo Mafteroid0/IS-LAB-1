@@ -16,12 +16,16 @@ public class Roles {
 
     private final Set<String> admins;
 
-    public Roles(@Value("${app.admins:admin}") List<String> admins) {
+    public Roles(@Value("${app.admins:}") List<String> admins) {
         this.admins = Set.copyOf(admins.stream().map(String::strip).filter(name -> !name.isEmpty()).toList());
     }
 
     public List<GrantedAuthority> authorities(String username) {
-        return AuthorityUtils.createAuthorityList(admins.contains(username) ? ADMIN : USER);
+        return AuthorityUtils.createAuthorityList(isAdminLogin(username) ? ADMIN : USER);
+    }
+
+    public boolean isAdminLogin(String username) {
+        return admins.contains(username);
     }
 
     public static boolean isAdmin(Authentication authentication) {

@@ -13,7 +13,6 @@ public interface RouteRepository extends JpaRepository<Route, Long>, RouteQuerie
     @Query("select r from Route r left join r.from f where f.id = :id or r.to.id = :id")
     List<Route> findByLocation(@Param("id") long id);
 
-    @Query("select case when count(r) > 0 then true else false end from Route r "
-            + "where lower(trim(r.name)) = lower(trim(:name)) and r.id <> :excluded")
-    boolean nameTaken(@Param("name") String name, @Param("excluded") long excluded);
+    @Query("select r.name from Route r where r.id <> :excluded")
+    List<String> namesExcept(@Param("excluded") long excluded);
 }

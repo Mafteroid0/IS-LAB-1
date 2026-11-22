@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Isolation;
 import java.util.Set;
 
 @Service
-@Transactional
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class RouteService {
     private final RouteRepository routes;
     private final CoordinatesRepository coordinates;
@@ -44,6 +44,7 @@ public class RouteService {
                 .stream().map(RouteView::of).toList(), total, selected, size);
     }
 
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
     public RouteView get(long id) {
         return RouteView.of(require(id));
     }

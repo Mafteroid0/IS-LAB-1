@@ -9,7 +9,7 @@ server:
 
 app:
   # Логины администраторов (через запятую): видят историю импорта всех пользователей.
-  admins: ${APP_ADMINS:admin}
+  admins: ${APP_ADMINS:}
 
 spring:
   application:

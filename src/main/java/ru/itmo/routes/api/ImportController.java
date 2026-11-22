@@ -23,14 +23,14 @@ public class ImportController {
 
     /** Обычный пользователь видит только свои операции импорта, администратор — все. */
     @GetMapping
-    public List<ImportView> history(Authentication current) {
-        return imports.history(current.getName(), Roles.isAdmin(current));
+    public List<ImportView> history(Authentication current, @RequestParam(required = false) Long before) {
+        if (before != null && before < 1) throw new InvalidInputException("Некорректный ID операции");
+        return imports.history(current.getName(), Roles.isAdmin(current), before == null ? Long.MAX_VALUE : before);
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ImportView> upload(@RequestParam("file") MultipartFile file, Authentication current)
             throws IOException {
-        if (file.isEmpty()) throw new InvalidInputException("Выберите непустой файл");
         return ResponseEntity.status(201).body(imports.run(current.getName(), file.getBytes()));
     }
 }
